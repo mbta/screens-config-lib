@@ -4,7 +4,7 @@ defmodule ScreensConfig do
   """
 
   @doc """
-  Hello world.
+  Hello world!
 
   ## Examples
 
