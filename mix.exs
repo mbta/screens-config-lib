@@ -21,7 +21,7 @@ defmodule ScreensConfig.MixProject do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
-      {:credo, "~> 1.6.0"},
+      {:credo, "~> 1.7.1"},
       {:dialyxir, "~> 1.1.0", only: [:dev, :test], runtime: false}
     ]
   end
