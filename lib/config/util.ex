@@ -1,4 +1,6 @@
 defmodule ScreensConfig.Util do
+  @moduledoc false
+
   @doc """
   Gets the keys of a struct given the module where the struct is defined.
 
