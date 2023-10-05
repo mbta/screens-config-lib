@@ -4,7 +4,6 @@ defmodule ScreensConfig.V2.GlEink do
 
   alias ScreensConfig.V2.{Alerts, Departures, EvergreenContentItem, Footer, LineMap}
   alias ScreensConfig.V2.Header.Destination
-  alias Screens.Util
 
   @type t :: %__MODULE__{
           departures: Departures.t(),
