@@ -1,4 +1,4 @@
-defmodule Config.Fetch.S3Fetch do
+defmodule ScreensConfig.Fetch.S3Fetch do
   def get_config(current_version \\ nil) do
     bucket = Application.get_env(:screens, :config_s3_bucket)
     path = config_path_for_environment()
