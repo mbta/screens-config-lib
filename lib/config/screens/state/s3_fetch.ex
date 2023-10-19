@@ -2,7 +2,20 @@ defmodule ScreensConfig.Screens.State.S3Fetch do
   @moduledoc false
 
   require Logger
+  alias Screens.Config
+
   @behaviour ScreensConfig.Screens.State.Fetch
+
+  @impl true
+  def fetch_config(current_version) do
+    with {:ok, body, new_version} <- get_config(current_version),
+         {:ok, parsed} <- Jason.decode(body) do
+      {:ok, Config.from_json(parsed), new_version}
+    else
+      :unchanged -> :unchanged
+      _ -> :error
+    end
+  end
 
   @impl true
   def get_config(current_version \\ nil) do

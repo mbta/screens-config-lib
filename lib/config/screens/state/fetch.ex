@@ -1,6 +1,10 @@
 defmodule ScreensConfig.Screens.State.Fetch do
   @moduledoc false
 
+  @type version_id :: String.t() | nil
+
+  @callback fetch_config(version_id) :: {:ok, term(), version_id} | :unchanged | :error
+
   @callback get_config(Fetch.version_id()) ::
               {:ok, String.t(), Fetch.version_id()} | :unchanged | :error
 
