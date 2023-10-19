@@ -1,6 +1,7 @@
 defmodule ScreensConfig.Screens.State.S3Fetch do
   @moduledoc false
 
+  require Logger
   @behaviour ScreensConfig.Screens.State.Fetch
 
   @impl true
@@ -29,7 +30,8 @@ defmodule ScreensConfig.Screens.State.S3Fetch do
         {:ok, body, etag}
 
       {:error, err} ->
-        {:error, err}
+        _ = Logger.info("s3_config_fetch_error #{inspect(err)}")
+        :error
     end
   end
 
