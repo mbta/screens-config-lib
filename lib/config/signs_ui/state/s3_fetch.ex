@@ -1,7 +1,9 @@
-defmodule ScreensConfig.Fetch.S3Fetch do
-  def get_config(current_version \\ nil) do
-    bucket = Application.get_env(:screens, :config_s3_bucket)
-    path = config_path_for_environment()
+defmodule Config.SignsUi.State.S3Fetch do
+  @moduledoc false
+
+  def get_from_s3(current_version \\ nil) do
+    bucket = Application.get_env(:screens, :signs_ui_s3_bucket)
+    path = Application.get_env(:screens, :signs_ui_s3_path)
 
     opts =
       case current_version do
@@ -24,12 +26,7 @@ defmodule ScreensConfig.Fetch.S3Fetch do
         {:ok, body, etag}
 
       {:error, err} ->
-        # _ = Logger.info("s3_config_fetch_error #{inspect(err)}")
-        :error
+        {:error, err}
     end
-  end
-
-  defp config_path_for_environment do
-    "screens/screens-prod.json"
   end
 end
