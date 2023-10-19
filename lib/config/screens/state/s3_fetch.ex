@@ -9,6 +9,8 @@ defmodule ScreensConfig.Screens.State.S3Fetch do
     bucket = Application.get_env(:screens, :config_s3_bucket)
     path = config_path_for_environment()
 
+    _ = Logger.info("test")
+
     opts =
       case current_version do
         nil -> []
