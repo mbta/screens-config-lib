@@ -1,4 +1,4 @@
-defmodule Screens.Config do
+defmodule ScreensConfig.Config do
   @moduledoc false
 
   alias ScreensConfig.{Devops, Screen}
