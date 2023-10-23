@@ -22,8 +22,6 @@ defmodule ScreensConfig.Screens.State.S3Fetch do
     bucket = Application.get_env(:screens, :config_s3_bucket)
     path = config_path_for_environment()
 
-    _ = Logger.info("test")
-
     opts =
       case current_version do
         nil -> []
@@ -45,7 +43,7 @@ defmodule ScreensConfig.Screens.State.S3Fetch do
         {:ok, body, etag}
 
       {:error, err} ->
-        _ = Logger.info("s3_config_fetch_error #{inspect(err)}")
+        Logger.info("s3_config_fetch_error #{inspect(err)}")
         :error
     end
   end

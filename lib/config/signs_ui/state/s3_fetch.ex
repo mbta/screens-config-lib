@@ -1,6 +1,8 @@
 defmodule Config.SignsUi.State.S3Fetch do
   @moduledoc false
 
+  require Logger
+
   def get_from_s3(current_version \\ nil) do
     bucket = Application.get_env(:screens, :signs_ui_s3_bucket)
     path = Application.get_env(:screens, :signs_ui_s3_path)
@@ -26,7 +28,8 @@ defmodule Config.SignsUi.State.S3Fetch do
         {:ok, body, etag}
 
       {:error, err} ->
-        {:error, err}
+        _ = Logger.info("s3_signs_ui_config_fetch_error #{inspect(err)}")
+        :error
     end
   end
 end
