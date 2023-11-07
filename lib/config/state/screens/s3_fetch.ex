@@ -61,6 +61,6 @@ defmodule ScreensConfig.State.Screens.S3Fetch do
   end
 
   defp config_path_for_environment do
-    "screens/screens-prod.json"
+    "screens/#{Application.get_env(:screens, :environment_name)}.json"
   end
 end
