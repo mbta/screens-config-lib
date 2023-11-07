@@ -19,7 +19,7 @@ defmodule ScreensConfig.State.Screens.S3Fetch do
 
   @impl true
   def get_config(current_version \\ nil) do
-    bucket = Application.get_env(:screens, :config_s3_bucket)
+    bucket = Application.get_env(:screens_config, :config_s3_bucket)
     path = config_path_for_environment()
 
     opts =
@@ -50,7 +50,7 @@ defmodule ScreensConfig.State.Screens.S3Fetch do
 
   @impl true
   def put_config(contents) do
-    bucket = Application.get_env(:screens, :config_s3_bucket)
+    bucket = Application.get_env(:screens_config, :config_s3_bucket)
     path = config_path_for_environment()
     put_operation = ExAws.S3.put_object(bucket, path, contents)
 
