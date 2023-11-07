@@ -1,16 +1,15 @@
-defmodule ScreensConfig.Screens.State.S3Fetch do
+defmodule ScreensConfig.State.SignsUi.S3Fetch do
   @moduledoc false
 
   require Logger
-  alias Screens.Config
-
-  @behaviour ScreensConfig.Screens.State.Fetch
+  alias ScreensConfig.State.SignsUi.Parse
+  @behaviour ScreensConfig.State.Fetch
 
   @impl true
   def fetch_config(current_version) do
     with {:ok, body, new_version} <- get_config(current_version),
-         {:ok, parsed} <- Jason.decode(body) do
-      {:ok, Config.from_json(parsed), new_version}
+         {:ok, decoded} <- Jason.decode(body) do
+      {:ok, Parse.parse_config(decoded), new_version}
     else
       :unchanged -> :unchanged
       _ -> :error
@@ -19,8 +18,8 @@ defmodule ScreensConfig.Screens.State.S3Fetch do
 
   @impl true
   def get_config(current_version \\ nil) do
-    bucket = Application.get_env(:screens, :config_s3_bucket)
-    path = config_path_for_environment()
+    bucket = Application.get_env(:screens, :signs_ui_s3_bucket)
+    path = Application.get_env(:screens, :signs_ui_s3_path)
 
     opts =
       case current_version do
@@ -43,24 +42,20 @@ defmodule ScreensConfig.Screens.State.S3Fetch do
         {:ok, body, etag}
 
       {:error, err} ->
-        Logger.info("s3_config_fetch_error #{inspect(err)}")
+        _ = Logger.info("s3_signs_ui_config_fetch_error #{inspect(err)}")
         :error
     end
   end
 
   @impl true
   def put_config(contents) do
-    bucket = Application.get_env(:screens, :config_s3_bucket)
-    path = config_path_for_environment()
+    bucket = Application.get_env(:screens, :signs_ui_s3_bucket)
+    path = Application.get_env(:screens, :signs_ui_s3_path)
     put_operation = ExAws.S3.put_object(bucket, path, contents)
 
     case ExAws.request(put_operation) do
       {:ok, %{status_code: 200}} -> :ok
       _ -> :error
     end
-  end
-
-  defp config_path_for_environment do
-    "screens/screens-prod.json"
   end
 end
