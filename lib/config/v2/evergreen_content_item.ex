@@ -1,7 +1,7 @@
 defmodule ScreensConfig.V2.EvergreenContentItem do
   @moduledoc false
 
-  alias ScreensConfig.V2.NewSchedule
+  alias ScreensConfig.V2.RecurrentSchedule
   alias ScreensConfig.V2.Schedule
   alias ScreensConfig.V2.WidgetInstance
 
@@ -9,7 +9,7 @@ defmodule ScreensConfig.V2.EvergreenContentItem do
           slot_names: list(WidgetInstance.slot_id()),
           asset_path: String.t(),
           priority: WidgetInstance.priority(),
-          schedule: list(Schedule.t()) | NewSchedule.t(),
+          schedule: list(Schedule.t()) | RecurrentSchedule.t(),
           text_for_audio: String.t(),
           audio_priority: WidgetInstance.priority()
         }
@@ -33,7 +33,7 @@ defmodule ScreensConfig.V2.EvergreenContentItem do
   end
 
   defp value_from_json("schedule", dates_and_times) when is_map(dates_and_times) do
-    NewSchedule.from_json(dates_and_times)
+    RecurrentSchedule.from_json(dates_and_times)
   end
 
   defp value_from_json(_, value), do: value

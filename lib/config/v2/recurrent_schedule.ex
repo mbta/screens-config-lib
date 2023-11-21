@@ -1,4 +1,4 @@
-defmodule ScreensConfig.V2.NewSchedule do
+defmodule ScreensConfig.V2.RecurrentSchedule do
   @moduledoc false
 
   @type date_range :: %{start_date: Date.t() | nil, end_date: Date.t() | nil}
