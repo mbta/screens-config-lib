@@ -38,5 +38,13 @@ defmodule ScreensConfig.V2.EvergreenContentItem do
 
   defp value_from_json(_, value), do: value
 
+  defp value_to_json(:schedule, datetime_periods) when is_list(datetime_periods) do
+    Enum.map(datetime_periods, &Schedule.to_json/1)
+  end
+
+  defp value_to_json(:schedule, dates_and_times) when is_map(dates_and_times) do
+    RecurrentSchedule.to_json(dates_and_times)
+  end
+
   defp value_to_json(_, value), do: value
 end
