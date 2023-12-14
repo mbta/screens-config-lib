@@ -24,10 +24,6 @@ defmodule ScreensConfig.V2.EvergreenContentItem do
 
   use ScreensConfig.Struct
 
-  defp value_from_json("slot_names", slot_names) do
-    Enum.map(slot_names, &String.to_existing_atom/1)
-  end
-
   defp value_from_json("schedule", datetime_periods) when is_list(datetime_periods) do
     Enum.map(datetime_periods, &Schedule.from_json/1)
   end
