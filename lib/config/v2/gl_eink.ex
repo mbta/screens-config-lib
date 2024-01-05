@@ -12,7 +12,8 @@ defmodule ScreensConfig.V2.GlEink do
           alerts: Alerts.t(),
           line_map: LineMap.t(),
           evergreen_content: list(EvergreenContentItem.t()),
-          audio: Audio.t()
+          audio: Audio.t(),
+          platform_location: :front | :back | nil
         }
 
   @enforce_keys [:departures, :footer, :header, :alerts, :line_map]
@@ -22,7 +23,8 @@ defmodule ScreensConfig.V2.GlEink do
             alerts: nil,
             line_map: nil,
             evergreen_content: [],
-            audio: Audio.from_json(:default)
+            audio: Audio.from_json(:default),
+            platform_location: nil
 
   use ScreensConfig.Struct,
     children: [
@@ -34,4 +36,14 @@ defmodule ScreensConfig.V2.GlEink do
       evergreen_content: {:list, EvergreenContentItem},
       audio: Audio
     ]
+
+  defp value_from_json("platform_location", location) do
+    case location do
+      "front" -> :front
+      "back" -> :back
+      _ -> nil
+    end
+  end
+
+  defp value_to_json(_, value), do: value
 end
