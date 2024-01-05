@@ -37,8 +37,13 @@ defmodule ScreensConfig.V2.GlEink do
       audio: Audio
     ]
 
-  defp value_from_json("platform_location", location),
-    do: location |> String.downcase() |> String.to_existing_atom()
+  defp value_from_json("platform_location", location) do
+    case location do
+      "front" -> :front
+      "back" -> :back
+      _ -> nil
+    end
+  end
 
   defp value_to_json(_, value), do: value
 end
