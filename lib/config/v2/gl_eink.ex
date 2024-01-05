@@ -13,7 +13,7 @@ defmodule ScreensConfig.V2.GlEink do
           line_map: LineMap.t(),
           evergreen_content: list(EvergreenContentItem.t()),
           audio: Audio.t(),
-          platform_location: :front | :back
+          platform_location: :front | :back | nil
         }
 
   @enforce_keys [:departures, :footer, :header, :alerts, :line_map]
