@@ -53,7 +53,7 @@ defmodule ScreensConfig.V2.PreFare do
       full_line_map: {:list, FullLineMap},
       evergreen_content: {:list, EvergreenContentItem},
       blue_bikes: BlueBikes,
-      reconstructed_alert_widget: CurrentStopId,
+      reconstructed_alert_widget: ReconstructedAlert,
       content_summary: ContentSummary,
       audio: Audio,
       cr_departures: CRDepartures,
