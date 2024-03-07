@@ -9,7 +9,6 @@ defmodule ScreensConfig.V2.PreFare do
     ElevatorStatus,
     EvergreenContentItem,
     FullLineMap,
-    ReconstructedAlert,
     ShuttleBusInfo
   }
 
@@ -17,7 +16,7 @@ defmodule ScreensConfig.V2.PreFare do
 
   @type t :: %__MODULE__{
           header: CurrentStopId.t(),
-          reconstructed_alert_widget: ReconstructedAlert.t(),
+          reconstructed_alert_widget: CurrentStopId.t(),
           elevator_status: ElevatorStatus.t(),
           full_line_map: list(FullLineMap.t()),
           evergreen_content: list(EvergreenContentItem.t()),
@@ -53,7 +52,7 @@ defmodule ScreensConfig.V2.PreFare do
       full_line_map: {:list, FullLineMap},
       evergreen_content: {:list, EvergreenContentItem},
       blue_bikes: BlueBikes,
-      reconstructed_alert_widget: ReconstructedAlert,
+      reconstructed_alert_widget: CurrentStopId,
       content_summary: ContentSummary,
       audio: Audio,
       cr_departures: CRDepartures,
