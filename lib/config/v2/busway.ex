@@ -1,4 +1,4 @@
-defmodule ScreensConfig.V2.Solari do
+defmodule ScreensConfig.V2.Busway do
   @moduledoc false
 
   alias ScreensConfig.V2.Departures
