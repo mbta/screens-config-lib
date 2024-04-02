@@ -1,5 +1,8 @@
 defmodule ScreensConfig.V2.Departures do
-  @moduledoc false
+  @moduledoc """
+  Configures the "departures" widget shared across several screen types, which displays upcoming
+  departures.
+  """
 
   alias ScreensConfig.V2.Departures.Section
 
