@@ -28,7 +28,7 @@ defmodule ScreensConfig.V2.Departures.Section do
             bidirectional: false
 
   use ScreensConfig.Struct,
-    children: [query: Query, header: Header, filters: Filters, headway: Headway]
+    children: [query: Query, header: Header, filters: Filters, headway: Headway, layout: Layout]
 
   defp value_from_json(_, value), do: value
 
