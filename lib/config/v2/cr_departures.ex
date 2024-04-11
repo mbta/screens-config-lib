@@ -18,7 +18,8 @@ defmodule ScreensConfig.V2.CRDepartures do
           wayfinding_arrows: platform_directions(),
           enabled: boolean(),
           header_pill: :red | :blue | :green | :orange,
-          pair_with_alert_widget: boolean()
+          pair_with_alert_widget: boolean(),
+          is_free: boolean()
         }
 
   defstruct station: nil,
@@ -28,7 +29,8 @@ defmodule ScreensConfig.V2.CRDepartures do
             wayfinding_arrows: nil,
             enabled: false,
             header_pill: nil,
-            pair_with_alert_widget: false
+            pair_with_alert_widget: false,
+            is_free: false
 
   use ScreensConfig.Struct, with_default: true
 
