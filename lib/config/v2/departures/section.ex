@@ -8,13 +8,12 @@ defmodule ScreensConfig.V2.Departures.Section do
     direction.
   """
 
-  alias ScreensConfig.V2.Departures.{Filters, Header, Headway, Layout, Query}
+  alias ScreensConfig.V2.Departures.{Filters, Header, Layout, Query}
 
   @type t :: %__MODULE__{
           query: Query.t(),
           filters: Filters.t(),
           header: Header.t(),
-          headway: Headway.t(),
           layout: Layout.t(),
           bidirectional: boolean()
         }
@@ -23,12 +22,11 @@ defmodule ScreensConfig.V2.Departures.Section do
   defstruct query: nil,
             filters: Filters.from_json(:default),
             header: Header.from_json(:default),
-            headway: Headway.from_json(:default),
             layout: Layout.from_json(:default),
             bidirectional: false
 
   use ScreensConfig.Struct,
-    children: [query: Query, header: Header, filters: Filters, headway: Headway, layout: Layout]
+    children: [query: Query, filters: Filters, header: Header, layout: Layout]
 
   defp value_from_json(_, value), do: value
 
