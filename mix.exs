@@ -22,7 +22,7 @@ defmodule ScreensConfig.MixProject do
   defp deps do
     [
       {:jason, "~> 1.0"},
-      {:credo, "~> 1.6.0", only: [:dev, :test]},
+      {:credo, "~> 1.7.6", only: [:dev, :test]},
       {:dialyxir, "~> 1.4.3", only: [:dev, :test], runtime: false}
     ]
   end
