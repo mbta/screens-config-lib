@@ -24,4 +24,7 @@ defmodule ScreensConfig.V2.Departures.Filters.RouteDirections do
 
   defp value_from_json("action", "include"), do: :include
   defp value_from_json("action", "exclude"), do: :exclude
+
+  defp value_from_json(_, value), do: value
+  defp value_to_json(_, value), do: value
 end
