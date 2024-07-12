@@ -9,7 +9,7 @@ defmodule ScreensConfig.V2.Departures.Layout do
   `max` and `min` as hard limits.
 
   If `max` is not set, the section may grow to fill all available space. If `base` is not set, it
-  defaults to the value of `max`.
+  defaults to the value of `min`.
 
   If `include_later` is set, the section includes a paging "Later Departures" component, which
   shows departures that would have otherwise been dropped due to space constraints (plus as many

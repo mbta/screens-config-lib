@@ -3,9 +3,8 @@ defmodule ScreensConfig.V2.Departures.Section do
   Configures a section within the Departures widget. Sections are a means of grouping departures
   by mode, stopping location, etc. Each section can fetch and display its departures differently.
 
-  - `bidirectional` enables a special mode that displays exactly two departures: the first one
-    that would normally be displayed, and the next departure on the same route in the opposite
-    direction.
+  - `bidirectional` enables a filter which enforces a maximum of 2 departures: the first that
+    would normally be displayed, and the next one in the opposite direction, if there is one.
   """
 
   alias ScreensConfig.V2.Departures.{Filters, Header, Headway, Layout, Query}
