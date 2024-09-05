@@ -11,22 +11,25 @@ defmodule ScreensConfig.V2.Busway do
   typically split into multiple sections.
   """
 
-  alias ScreensConfig.V2.{Departures, EvergreenContentItem}
+  alias ScreensConfig.V2.{Audio, Departures, EvergreenContentItem}
   alias ScreensConfig.V2.Header.CurrentStopName
 
   @type t :: %__MODULE__{
+          audio: Audio.t(),
           departures: Departures.t(),
           evergreen_content: list(EvergreenContentItem.t()),
           header: CurrentStopName.t()
         }
 
   @enforce_keys [:departures, :header]
-  defstruct departures: nil,
+  defstruct audio: Audio.always(),
+            departures: nil,
             evergreen_content: [],
             header: nil
 
   use ScreensConfig.Struct,
     children: [
+      audio: Audio,
       departures: Departures,
       evergreen_content: {:list, EvergreenContentItem},
       header: CurrentStopName

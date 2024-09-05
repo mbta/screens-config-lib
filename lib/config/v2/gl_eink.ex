@@ -23,7 +23,7 @@ defmodule ScreensConfig.V2.GlEink do
             alerts: nil,
             line_map: nil,
             evergreen_content: [],
-            audio: Audio.from_json(:default),
+            audio: Audio.always(),
             platform_location: nil
 
   use ScreensConfig.Struct,

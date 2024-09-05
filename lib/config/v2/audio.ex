@@ -21,6 +21,14 @@ defmodule ScreensConfig.V2.Audio do
             nighttime_volume: 0.0,
             interval_offset_seconds: 0
 
+  def always do
+    %__MODULE__{
+      start_time: ~T[00:00:00],
+      stop_time: ~T[23:59:59],
+      days_active: [1, 2, 3, 4, 5, 6, 7]
+    }
+  end
+
   use ScreensConfig.Struct, with_default: true
 
   for time_key <- ~w[start_time stop_time daytime_start_time daytime_stop_time]a do
