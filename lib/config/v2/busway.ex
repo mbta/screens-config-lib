@@ -22,11 +22,7 @@ defmodule ScreensConfig.V2.Busway do
         }
 
   @enforce_keys [:departures, :header]
-  defstruct audio: %Audio{
-              start_time: ~T[00:00:00],
-              stop_time: ~T[23:59:59],
-              days_active: [1, 2, 3, 4, 5, 6, 7]
-            },
+  defstruct audio: Audio.always(),
             departures: nil,
             evergreen_content: [],
             header: nil

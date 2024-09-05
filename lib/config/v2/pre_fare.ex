@@ -41,7 +41,7 @@ defmodule ScreensConfig.V2.PreFare do
             evergreen_content: [],
             blue_bikes: BlueBikes.from_json(:default),
             content_summary: nil,
-            audio: Audio.from_json(:default),
+            audio: Audio.always(),
             cr_departures: CRDepartures.from_json(:default),
             shuttle_bus_info: ShuttleBusInfo.from_json(:default)
 
