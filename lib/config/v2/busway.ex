@@ -15,10 +15,10 @@ defmodule ScreensConfig.V2.Busway do
   alias ScreensConfig.V2.Header.CurrentStopName
 
   @type t :: %__MODULE__{
+          audio: Audio.t(),
           departures: Departures.t(),
           evergreen_content: list(EvergreenContentItem.t()),
-          header: CurrentStopName.t(),
-          audio: Audio.t()
+          header: CurrentStopName.t()
         }
 
   @enforce_keys [:departures, :header]
@@ -29,9 +29,9 @@ defmodule ScreensConfig.V2.Busway do
 
   use ScreensConfig.Struct,
     children: [
+      audio: Audio,
       departures: Departures,
       evergreen_content: {:list, EvergreenContentItem},
-      header: CurrentStopName,
-      audio: Audio
+      header: CurrentStopName
     ]
 end
