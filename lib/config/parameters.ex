@@ -2,7 +2,7 @@ defmodule ScreensConfig.V2.ScreenData.Parameters do
   @moduledoc false
 
   # This list should contain IDs of any apps that __do not__ show any widget that implements `Screens.V2.AlertsWidget`.
-  @apps_that_do_not_show_alerts [:triptych_v2]
+  @apps_that_do_not_show_alerts []
 
   @doc """
   Returns true for screen types that can show any widget that implements `Screens.V2.AlertsWidget`.
