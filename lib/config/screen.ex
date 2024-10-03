@@ -13,6 +13,7 @@ defmodule ScreensConfig.Screen do
           | :busway_v2
           | :dup
           | :dup_v2
+          | :elevator_v2
           | :gl_eink_single
           | :gl_eink_double
           | :gl_eink_v2
@@ -22,7 +23,7 @@ defmodule ScreensConfig.Screen do
           | :pre_fare_v2
 
   @type t :: %__MODULE__{
-          vendor: :gds | :mercury | :solari | :c3ms | :outfront | :lg_mri,
+          vendor: :gds | :mercury | :solari | :c3ms | :outfront | :lg_mri | :mimo,
           device_id: String.t(),
           name: String.t(),
           app_id: app_id(),
@@ -38,6 +39,7 @@ defmodule ScreensConfig.Screen do
             | V2.BusShelter.t()
             | V2.Busway.t()
             | V2.Dup.t()
+            | V2.Elevator.t()
             | V2.GlEink.t()
             | V2.PreFare.t()
             | V2.SolariLarge.t(),
@@ -48,7 +50,7 @@ defmodule ScreensConfig.Screen do
   @v2_app_id_suffix "_v2"
 
   @recognized_app_ids ~w[bus_eink dup gl_eink_single gl_eink_double solari solari_large]a
-  @recognized_v2_app_ids ~w[bus_eink_v2 bus_shelter_v2 busway_v2 dup_v2 gl_eink_v2 solari_large_v2 pre_fare_v2]a
+  @recognized_v2_app_ids ~w[bus_eink_v2 bus_shelter_v2 busway_v2 dup_v2 elevator_v2 gl_eink_v2 solari_large_v2 pre_fare_v2]a
   @recognized_app_id_strings Enum.map(
                                @recognized_app_ids ++ @recognized_v2_app_ids,
                                &Atom.to_string/1
@@ -61,6 +63,7 @@ defmodule ScreensConfig.Screen do
     busway_v2: V2.Busway,
     dup: Dup,
     dup_v2: V2.Dup,
+    elevator_v2: V2.Elevator,
     gl_eink_single: Gl,
     gl_eink_double: Gl,
     gl_eink_v2: V2.GlEink,
@@ -119,7 +122,7 @@ defmodule ScreensConfig.Screen do
     |> String.ends_with?(@v2_app_id_suffix)
   end
 
-  for vendor <- ~w[gds mercury solari c3ms outfront]a do
+  for vendor <- ~w[gds mercury solari mimo c3ms outfront]a do
     vendor_string = Atom.to_string(vendor)
 
     defp value_from_json("vendor", unquote(vendor_string), _app_id) do
