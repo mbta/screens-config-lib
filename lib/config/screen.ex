@@ -23,7 +23,7 @@ defmodule ScreensConfig.Screen do
           | :pre_fare_v2
 
   @type t :: %__MODULE__{
-          vendor: :gds | :mercury | :solari | :c3ms | :outfront | :lg_mri | :mimo,
+          vendor: :gds | :mercury | :solari | :c3ms | :outfront | :lg_mri | :mimo | :n_a,
           device_id: String.t(),
           name: String.t(),
           app_id: app_id(),
@@ -122,12 +122,12 @@ defmodule ScreensConfig.Screen do
     |> String.ends_with?(@v2_app_id_suffix)
   end
 
-  for vendor <- ~w[gds mercury solari mimo c3ms outfront]a do
-    vendor_string = Atom.to_string(vendor)
+  defp value_from_json("vendor", "n/a", _app_id) do
+    :n_a
+  end
 
-    defp value_from_json("vendor", unquote(vendor_string), _app_id) do
-      unquote(vendor)
-    end
+  defp value_from_json("vendor", vendor_string, _app_id) do
+    String.to_existing_atom(vendor_string)
   end
 
   defp value_from_json("app_id", _app_id_string, app_id), do: app_id
