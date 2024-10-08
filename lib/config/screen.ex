@@ -122,7 +122,7 @@ defmodule ScreensConfig.Screen do
     |> String.ends_with?(@v2_app_id_suffix)
   end
 
-  defp value_from_json("vendor", "n/a", _app_id) do
+  defp value_from_json("vendor", vendor_string, _app_id) when vendor_string in ["n/a", ""] do
     :n_a
   end
 
