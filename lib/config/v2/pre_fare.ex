@@ -2,7 +2,6 @@ defmodule ScreensConfig.V2.PreFare do
   @moduledoc false
 
   alias ScreensConfig.V2.{
-    Audio,
     BlueBikes,
     ContentSummary,
     CRDepartures,
@@ -22,7 +21,6 @@ defmodule ScreensConfig.V2.PreFare do
           evergreen_content: list(EvergreenContentItem.t()),
           blue_bikes: BlueBikes.t(),
           content_summary: ContentSummary.t(),
-          audio: Audio.t(),
           cr_departures: CRDepartures.t(),
           shuttle_bus_info: ShuttleBusInfo.t()
         }
@@ -41,7 +39,6 @@ defmodule ScreensConfig.V2.PreFare do
             evergreen_content: [],
             blue_bikes: BlueBikes.from_json(:default),
             content_summary: nil,
-            audio: Audio.always(),
             cr_departures: CRDepartures.from_json(:default),
             shuttle_bus_info: ShuttleBusInfo.from_json(:default)
 
@@ -54,7 +51,6 @@ defmodule ScreensConfig.V2.PreFare do
       blue_bikes: BlueBikes,
       reconstructed_alert_widget: CurrentStopId,
       content_summary: ContentSummary,
-      audio: Audio,
       cr_departures: CRDepartures,
       shuttle_bus_info: ShuttleBusInfo
     ]
