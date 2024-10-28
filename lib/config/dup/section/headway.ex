@@ -1,6 +1,5 @@
 defmodule ScreensConfig.Dup.Section.Headway do
   @moduledoc false
-  # credo:disable-for-this-file Credo.Check.Design.DuplicatedCode
 
   @typep sign_id :: String.t()
   @typep headway_id :: String.t() | nil
