@@ -3,87 +3,60 @@ defmodule ScreensConfig.Screen do
 
   @behaviour ScreensConfig.Behaviour
 
-  alias ScreensConfig.{Bus, Dup, Gl, Solari, V2}
-  alias ScreensConfig.Util
+  alias ScreensConfig.{Util, V2}
 
   @type app_id ::
-          :bus_eink
-          | :bus_eink_v2
+          :bus_eink_v2
           | :bus_shelter_v2
           | :busway_v2
-          | :dup
           | :dup_v2
           | :elevator_v2
-          | :gl_eink_single
-          | :gl_eink_double
           | :gl_eink_v2
-          | :solari
-          | :solari_large
-          | :solari_large_v2
           | :pre_fare_v2
 
   @type t :: %__MODULE__{
-          vendor: :gds | :mercury | :solari | :c3ms | :outfront | :lg_mri | :mimo | nil,
-          device_id: String.t(),
-          name: String.t(),
           app_id: app_id(),
-          refresh_if_loaded_before: DateTime.t() | nil,
-          disabled: boolean(),
-          hidden_from_screenplay: boolean(),
           app_params:
-            Bus.t()
-            | Dup.t()
-            | Gl.t()
-            | Solari.t()
-            | V2.BusEink.t()
+            V2.BusEink.t()
             | V2.BusShelter.t()
             | V2.Busway.t()
             | V2.Dup.t()
             | V2.Elevator.t()
             | V2.GlEink.t()
-            | V2.PreFare.t()
-            | V2.SolariLarge.t(),
-          tags: list(String.t())
+            | V2.PreFare.t(),
+          device_id: String.t(),
+          disabled: boolean(),
+          hidden_from_screenplay: boolean(),
+          name: String.t(),
+          refresh_if_loaded_before: DateTime.t() | nil,
+          tags: list(String.t()),
+          vendor: :c3ms | :gds | :lg_mri | :mercury | :mimo | :outfront | :solari | nil
         }
 
-  # If a Screens client app uses widgets, its ID must end with this suffix.
-  @v2_app_id_suffix "_v2"
-
-  @recognized_app_ids ~w[bus_eink dup gl_eink_single gl_eink_double solari solari_large]a
-  @recognized_v2_app_ids ~w[bus_eink_v2 bus_shelter_v2 busway_v2 dup_v2 elevator_v2 gl_eink_v2 solari_large_v2 pre_fare_v2]a
-  @recognized_app_id_strings Enum.map(
-                               @recognized_app_ids ++ @recognized_v2_app_ids,
-                               &Atom.to_string/1
-                             )
+  @recognized_app_ids ~w[bus_eink_v2 bus_shelter_v2 busway_v2 dup_v2 elevator_v2 gl_eink_v2 solari_large_v2 pre_fare_v2]a
+  @recognized_app_id_strings Enum.map(@recognized_app_ids, &Atom.to_string/1)
   @recognized_vendors ~w[gds mercury solari c3ms outfront lg_mri mimo]a
 
   @app_config_modules_by_app_id %{
-    bus_eink: Bus,
     bus_eink_v2: V2.BusEink,
     bus_shelter_v2: V2.BusShelter,
     busway_v2: V2.Busway,
-    dup: Dup,
     dup_v2: V2.Dup,
     elevator_v2: V2.Elevator,
-    gl_eink_single: Gl,
-    gl_eink_double: Gl,
     gl_eink_v2: V2.GlEink,
-    solari: Solari,
-    solari_large: Solari,
-    solari_large_v2: V2.SolariLarge,
     pre_fare_v2: V2.PreFare
   }
 
-  @enforce_keys [:vendor, :device_id, :name, :app_id, :app_params]
-  defstruct vendor: nil,
+  @enforce_keys ~w[app_id app_params device_id name vendor]a
+  defstruct app_id: nil,
+            app_params: nil,
             device_id: nil,
-            name: nil,
-            app_id: nil,
-            refresh_if_loaded_before: nil,
             disabled: false,
             hidden_from_screenplay: false,
-            app_params: nil,
-            tags: []
+            name: nil,
+            refresh_if_loaded_before: nil,
+            tags: [],
+            vendor: nil
 
   @impl true
   @spec from_json(map()) :: t() | nil
@@ -114,13 +87,6 @@ defmodule ScreensConfig.Screen do
   @spec schedule_refresh_at_time(t(), DateTime.t()) :: t()
   def schedule_refresh_at_time(screen_config, time) do
     %__MODULE__{screen_config | refresh_if_loaded_before: time}
-  end
-
-  @spec v2_screen?(t()) :: boolean()
-  def v2_screen?(screen_config) do
-    screen_config.app_id
-    |> Atom.to_string()
-    |> String.ends_with?(@v2_app_id_suffix)
   end
 
   defp value_from_json("vendor", vendor_string, _app_id) when vendor_string in ["n/a", "", nil],
