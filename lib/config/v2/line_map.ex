@@ -2,10 +2,10 @@ defmodule ScreensConfig.V2.LineMap do
   @moduledoc false
 
   @type t :: %__MODULE__{
-          stop_id: ScreensConfig.Stops.Stop.id(),
-          station_id: ScreensConfig.Stops.Stop.id(),
+          stop_id: String.t(),
+          station_id: String.t(),
           direction_id: 0 | 1,
-          route_id: ScreensConfig.Routes.Route.id()
+          route_id: String.t()
         }
 
   @enforce_keys [:stop_id, :station_id, :direction_id, :route_id]
