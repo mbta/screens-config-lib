@@ -1,21 +1,19 @@
 defmodule ScreensConfig.V2.ShuttleBusInfo do
   @moduledoc false
 
-  alias ScreensConfig.V2.ShuttleBusSchedule
-  alias ScreensConfig.V2.WidgetInstance
+  alias ScreensConfig.Arrow
+  alias ScreensConfig.V2.{ShuttleBusSchedule, WidgetInstance}
 
   @type t :: %__MODULE__{
           minutes_range_to_destination_schedule: list(ShuttleBusSchedule.t()),
           destination: String.t(),
-          arrow: arrow(),
+          arrow: Arrow.t(),
           english_boarding_instructions: String.t(),
           spanish_boarding_instructions: String.t(),
           audio_boarding_instructions: String.t(),
           priority: WidgetInstance.priority(),
           enabled: boolean()
         }
-
-  @type arrow :: :n | :ne | :e | :se | :s | :sw | :w | :nw | nil
 
   defstruct minutes_range_to_destination_schedule: [],
             destination: nil,
