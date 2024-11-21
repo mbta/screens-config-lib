@@ -1,16 +1,15 @@
 defmodule ScreensConfig.V2.Elevator do
   @moduledoc false
 
+  alias ScreensConfig.Arrow
   alias ScreensConfig.V2.EvergreenContentItem
-
-  @type arrow_direction :: :n | :s | :e | :w
 
   @type t :: %__MODULE__{
           elevator_id: String.t(),
           evergreen_content: list(EvergreenContentItem.t()),
           alternate_direction_text: String.t(),
           accessible_path_image_url: String.t(),
-          accessible_path_direction_arrow: arrow_direction()
+          accessible_path_direction_arrow: Arrow.t()
         }
 
   @enforce_keys [

@@ -11,8 +11,10 @@ defmodule ScreensConfig.V2.Departures.Header do
   If `title` is not set, there is no visual header, but `read_as` is still read out, if set.
   """
 
+  alias ScreensConfig.Arrow
+
   @type t :: %__MODULE__{
-          arrow: nil | :n | :ne | :e | :se | :s | :sw | :w | :nw,
+          arrow: Arrow.t(),
           read_as: String.t() | nil,
           title: String.t() | nil
         }
