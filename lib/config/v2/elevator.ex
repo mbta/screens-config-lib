@@ -8,9 +8,9 @@ defmodule ScreensConfig.V2.Elevator do
           elevator_id: String.t(),
           evergreen_content: list(EvergreenContentItem.t()),
           alternate_direction_text: String.t(),
-          accessible_path_image_url: String.t(),
+          accessible_path_image_url: String.t() | nil,
           accessible_path_direction_arrow: Arrow.t(),
-          you_are_here_coordinates: %{x: non_neg_integer(), y: non_neg_integer()}
+          accessible_path_image_here_coordinates: %{x: non_neg_integer(), y: non_neg_integer()}
         }
 
   @enforce_keys [
@@ -22,7 +22,7 @@ defmodule ScreensConfig.V2.Elevator do
               [
                 evergreen_content: [],
                 accessible_path_image_url: nil,
-                you_are_here_coordinates: %{x: 0, y: 0}
+                accessible_path_image_here_coordinates: %{x: 0, y: 0}
               ]
 
   use ScreensConfig.Struct,
