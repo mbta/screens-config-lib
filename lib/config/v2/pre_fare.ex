@@ -2,7 +2,6 @@ defmodule ScreensConfig.V2.PreFare do
   @moduledoc false
 
   alias ScreensConfig.V2.{
-    BlueBikes,
     ContentSummary,
     CRDepartures,
     ElevatorStatus,
@@ -19,7 +18,6 @@ defmodule ScreensConfig.V2.PreFare do
           elevator_status: ElevatorStatus.t(),
           full_line_map: list(FullLineMap.t()),
           evergreen_content: list(EvergreenContentItem.t()),
-          blue_bikes: BlueBikes.t(),
           content_summary: ContentSummary.t(),
           cr_departures: CRDepartures.t(),
           shuttle_bus_info: ShuttleBusInfo.t()
@@ -37,7 +35,6 @@ defmodule ScreensConfig.V2.PreFare do
             elevator_status: nil,
             full_line_map: [],
             evergreen_content: [],
-            blue_bikes: BlueBikes.from_json(:default),
             content_summary: nil,
             cr_departures: CRDepartures.from_json(:default),
             shuttle_bus_info: ShuttleBusInfo.from_json(:default)
@@ -48,7 +45,6 @@ defmodule ScreensConfig.V2.PreFare do
       elevator_status: ElevatorStatus,
       full_line_map: {:list, FullLineMap},
       evergreen_content: {:list, EvergreenContentItem},
-      blue_bikes: BlueBikes,
       reconstructed_alert_widget: CurrentStopId,
       content_summary: ContentSummary,
       cr_departures: CRDepartures,
