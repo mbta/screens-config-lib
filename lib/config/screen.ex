@@ -47,7 +47,7 @@ defmodule ScreensConfig.Screen do
     elevator_v2: V2.Elevator,
     gl_eink_v2: V2.GlEink,
     pre_fare_v2: V2.PreFare,
-    on_bus_v2: V2.OnBus,
+    on_bus_v2: V2.OnBus
   }
 
   @enforce_keys ~w[app_id app_params device_id name vendor]a

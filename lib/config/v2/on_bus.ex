@@ -3,18 +3,12 @@ defmodule ScreensConfig.V2.OnBus do
 
   alias ScreensConfig.V2.Header.CurrentStopId
 
-  @type t :: %__MODULE__{
-          header: CurrentStopId.t(),
-        }
+  @type t :: %__MODULE__{}
 
-  @enforce_keys [
-    :header,
-  ]
+  @enforce_keys []
 
   defstruct header: nil
 
   use ScreensConfig.Struct,
-    children: [
-      header: CurrentStopId,
-    ]
+    children: []
 end
