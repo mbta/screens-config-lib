@@ -1,7 +1,7 @@
 defmodule ScreensConfig.V2.OnBus do
   @moduledoc false
 
-  alias ScreensConfig.V2.Header.BusId
+  alias ScreensConfig.V2.EvergreenContentItem
 
   @type t :: %__MODULE__{
           bus_id: String.t(),
