@@ -1,10 +1,20 @@
 defmodule ScreensConfig.V2.OnBus do
   @moduledoc false
 
-  @type t :: %__MODULE__{}
+  alias ScreensConfig.V2.Header.Header.BusId
 
-  @enforce_keys []
+  @type t :: %__MODULE__{
+          header: BusId.t()
+        }
+
+  @enforce_keys [
+    :header
+  ]
+
+  defstruct header: nil
 
   use ScreensConfig.Struct,
-    children: []
+    children: [
+      header: BusId
+    ]
 end
