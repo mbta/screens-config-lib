@@ -12,7 +12,10 @@ defmodule ScreensConfig.V2.OnBus do
     :bus_id
   ]
 
-  defstruct evergreen_content: []
+  defstruct @enforce_keys ++
+              [
+                evergreen_content: []
+              ]
 
   use ScreensConfig.Struct,
     children: [
