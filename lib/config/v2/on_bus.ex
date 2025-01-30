@@ -4,17 +4,22 @@ defmodule ScreensConfig.V2.OnBus do
   alias ScreensConfig.V2.Header.BusId
 
   @type t :: %__MODULE__{
-          header: BusId.t()
+          bus_id: String.t(),
+          evergreen_content: list(EvergreenContentItem.t())
         }
 
   @enforce_keys [
-    :header
+    :bus_id
   ]
 
-  defstruct header: nil
+  defstruct evergreen_content: []
 
   use ScreensConfig.Struct,
     children: [
-      header: BusId
+      evergreen_content: {:list, EvergreenContentItem}
     ]
+
+  defp value_from_json(_, value), do: value
+
+  defp value_to_json(_, value), do: value
 end
