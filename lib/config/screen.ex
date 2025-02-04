@@ -35,7 +35,7 @@ defmodule ScreensConfig.Screen do
           vendor: :c3ms | :gds | :lg_mri | :mercury | :mimo | :outfront | :solari | nil
         }
 
-  @recognized_app_ids ~w[bus_eink_v2 bus_shelter_v2 busway_v2 dup_v2 elevator_v2 gl_eink_v2 on_bus_v2 pre_fare_v2 solari_large_v2]a
+  @recognized_app_ids ~w[bus_eink_v2 bus_shelter_v2 busway_v2 dup_v2 elevator_v2 gl_eink_v2 on_bus_v2 pre_fare_v2]a
   @recognized_app_id_strings Enum.map(@recognized_app_ids, &Atom.to_string/1)
   @recognized_vendors ~w[c3ms gds hanover lg_mri mercury mimo outfront solari]a
 
