@@ -12,6 +12,7 @@ defmodule ScreensConfig.Screen do
           | :dup_v2
           | :elevator_v2
           | :gl_eink_v2
+          | :on_bus_v2
           | :pre_fare_v2
 
   @type t :: %__MODULE__{
@@ -23,6 +24,7 @@ defmodule ScreensConfig.Screen do
             | V2.Dup.t()
             | V2.Elevator.t()
             | V2.GlEink.t()
+            | V2.OnBus.t()
             | V2.PreFare.t(),
           device_id: String.t(),
           disabled: boolean(),
@@ -33,9 +35,9 @@ defmodule ScreensConfig.Screen do
           vendor: :c3ms | :gds | :lg_mri | :mercury | :mimo | :outfront | :solari | nil
         }
 
-  @recognized_app_ids ~w[bus_eink_v2 bus_shelter_v2 busway_v2 dup_v2 elevator_v2 gl_eink_v2 solari_large_v2 pre_fare_v2]a
+  @recognized_app_ids ~w[bus_eink_v2 bus_shelter_v2 busway_v2 dup_v2 elevator_v2 gl_eink_v2 on_bus_v2 pre_fare_v2 solari_large_v2]a
   @recognized_app_id_strings Enum.map(@recognized_app_ids, &Atom.to_string/1)
-  @recognized_vendors ~w[gds mercury solari c3ms outfront lg_mri mimo]a
+  @recognized_vendors ~w[c3ms gds hanover lg_mri mercury mimo outfront solari]a
 
   @app_config_modules_by_app_id %{
     bus_eink_v2: V2.BusEink,
@@ -44,6 +46,7 @@ defmodule ScreensConfig.Screen do
     dup_v2: V2.Dup,
     elevator_v2: V2.Elevator,
     gl_eink_v2: V2.GlEink,
+    on_bus_v2: V2.OnBus,
     pre_fare_v2: V2.PreFare
   }
 
