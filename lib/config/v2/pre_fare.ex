@@ -13,6 +13,7 @@ defmodule ScreensConfig.V2.PreFare do
   alias ScreensConfig.V2.Header.CurrentStopId
 
   @type t :: %__MODULE__{
+          template: :duo | :solo,
           header: CurrentStopId.t(),
           reconstructed_alert_widget: CurrentStopId.t(),
           elevator_status: ElevatorStatus.t(),
@@ -30,7 +31,8 @@ defmodule ScreensConfig.V2.PreFare do
     :full_line_map,
     :content_summary
   ]
-  defstruct header: nil,
+  defstruct template: :duo,
+            header: nil,
             reconstructed_alert_widget: nil,
             elevator_status: nil,
             full_line_map: [],
@@ -50,4 +52,9 @@ defmodule ScreensConfig.V2.PreFare do
       cr_departures: CRDepartures,
       shuttle_bus_info: ShuttleBusInfo
     ]
+
+  defp value_from_json("template", "duo"), do: :duo
+  defp value_from_json("template", "solo"), do: :solo
+
+  defp value_to_json(_, value), do: value
 end
