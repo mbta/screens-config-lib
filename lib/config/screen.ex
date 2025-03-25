@@ -3,7 +3,8 @@ defmodule ScreensConfig.Screen do
 
   @behaviour ScreensConfig.Behaviour
 
-  alias ScreensConfig.{Util, V2}
+  alias ScreensConfig.Util
+  alias __MODULE__.{BusEink, BusShelter, Busway, Dup, Elevator, GlEink, OnBus, PreFare}
 
   @type app_id ::
           :bus_eink_v2
@@ -18,14 +19,14 @@ defmodule ScreensConfig.Screen do
   @type t :: %__MODULE__{
           app_id: app_id(),
           app_params:
-            V2.BusEink.t()
-            | V2.BusShelter.t()
-            | V2.Busway.t()
-            | V2.Dup.t()
-            | V2.Elevator.t()
-            | V2.GlEink.t()
-            | V2.OnBus.t()
-            | V2.PreFare.t(),
+            BusEink.t()
+            | BusShelter.t()
+            | Busway.t()
+            | Dup.t()
+            | Elevator.t()
+            | GlEink.t()
+            | OnBus.t()
+            | PreFare.t(),
           device_id: String.t(),
           disabled: boolean(),
           hidden_from_screenplay: boolean(),
@@ -40,14 +41,14 @@ defmodule ScreensConfig.Screen do
   @recognized_vendors ~w[c3ms gds hanover lg_mri mercury mimo outfront solari]a
 
   @app_config_modules_by_app_id %{
-    bus_eink_v2: V2.BusEink,
-    bus_shelter_v2: V2.BusShelter,
-    busway_v2: V2.Busway,
-    dup_v2: V2.Dup,
-    elevator_v2: V2.Elevator,
-    gl_eink_v2: V2.GlEink,
-    on_bus_v2: V2.OnBus,
-    pre_fare_v2: V2.PreFare
+    bus_eink_v2: BusEink,
+    bus_shelter_v2: BusShelter,
+    busway_v2: Busway,
+    dup_v2: Dup,
+    elevator_v2: Elevator,
+    gl_eink_v2: GlEink,
+    on_bus_v2: OnBus,
+    pre_fare_v2: PreFare
   }
 
   @enforce_keys ~w[app_id app_params device_id name vendor]a
