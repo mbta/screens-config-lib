@@ -5,8 +5,8 @@ defmodule ScreensConfig.Departures.Section do
 
   - `bidirectional` enables a filter which enforces a maximum of 2 departures: the first that
     would normally be displayed, and the next one in the opposite direction, if there is one.
-  - `wayfinding_only`disables fetching of departures so that only wayfinding directions, configured
-    in the header, but no upcoming departures, are displayed
+  - `wayfinding_only_text`disables fetching of departures so that only wayfinding directions,
+    passed in through this parameter, are displayed
   """
 
   alias ScreensConfig.Departures.{Filters, Header, Layout, Query}
@@ -17,7 +17,7 @@ defmodule ScreensConfig.Departures.Section do
           header: Header.t(),
           layout: Layout.t(),
           bidirectional: boolean(),
-          wayfinding_only: boolean()
+          wayfinding_only_text: String.t() | nil
         }
 
   @enforce_keys [:query]
@@ -26,7 +26,7 @@ defmodule ScreensConfig.Departures.Section do
             header: Header.from_json(:default),
             layout: Layout.from_json(:default),
             bidirectional: false,
-            wayfinding_only: false
+            wayfinding_only_text: nil
 
   use ScreensConfig.Struct,
     children: [query: Query, header: Header, filters: Filters, layout: Layout]
