@@ -7,6 +7,8 @@ defmodule ScreensConfig.Departures.Header do
     compass directions where "n" is towards the top of the display.
   - `read_as` is how the section should be announced in audio readouts. If `nil`, defaults to the
     configured `title`.
+  - `wayfinding_text` is a String that sets a subheading, intended for wayfinding directions. If `nil`,
+    defaults to not including the subheading
 
   If `title` is not set, there is no visual header, but `read_as` is still read out, if set.
   """
@@ -16,10 +18,11 @@ defmodule ScreensConfig.Departures.Header do
   @type t :: %__MODULE__{
           arrow: Arrow.t(),
           read_as: String.t() | nil,
-          title: String.t() | nil
+          title: String.t() | nil,
+          wayfinding_text: String.t() | nil
         }
 
-  defstruct [:arrow, :read_as, :title]
+  defstruct [:arrow, :read_as, :title, :wayfinding_text]
 
   use ScreensConfig.Struct, with_default: true
 
