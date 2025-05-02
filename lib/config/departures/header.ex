@@ -18,11 +18,11 @@ defmodule ScreensConfig.Departures.Header do
   @type t :: %__MODULE__{
           arrow: Arrow.t(),
           read_as: String.t() | nil,
-          title: String.t() | nil,
-          subtitle: String.t() | nil
+          subtitle: String.t() | nil,
+          title: String.t() | nil
         }
 
-  defstruct [:arrow, :read_as, :title, :subtitle]
+  defstruct [:arrow, :read_as, :subtitle, :title]
 
   use ScreensConfig.Struct, with_default: true
 
