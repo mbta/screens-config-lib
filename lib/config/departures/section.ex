@@ -17,7 +17,8 @@ defmodule ScreensConfig.Departures.Section do
           header: Header.t(),
           layout: Layout.t(),
           bidirectional: boolean(),
-          header_only: boolean()
+          header_only: boolean(),
+          grouping_type: :time | :destination
         }
 
   @enforce_keys [:query]
@@ -26,12 +27,15 @@ defmodule ScreensConfig.Departures.Section do
             header: Header.from_json(:default),
             layout: Layout.from_json(:default),
             bidirectional: false,
-            header_only: false
+            header_only: false,
+            grouping_type: :time
 
   use ScreensConfig.Struct,
     children: [query: Query, header: Header, filters: Filters, layout: Layout]
 
-  defp value_from_json(_, value), do: value
+  defp value_from_json("grouping_type", "time"), do: :time
+  defp value_from_json("grouping_type", "destination"), do: :destination
 
+  defp value_from_json(_, value), do: value
   defp value_to_json(_, value), do: value
 end
