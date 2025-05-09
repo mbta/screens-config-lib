@@ -1,6 +1,8 @@
 defmodule ScreensConfig.Screen.PreFare do
   @moduledoc false
 
+  alias ScreensConfig.Departures
+
   alias ScreensConfig.{
     ContentSummary,
     CRDepartures,
@@ -21,7 +23,8 @@ defmodule ScreensConfig.Screen.PreFare do
           evergreen_content: list(EvergreenContentItem.t()),
           content_summary: ContentSummary.t(),
           cr_departures: CRDepartures.t(),
-          shuttle_bus_info: ShuttleBusInfo.t()
+          shuttle_bus_info: ShuttleBusInfo.t(),
+          departures: Departures.t() | nil
         }
 
   @enforce_keys [
@@ -39,7 +42,8 @@ defmodule ScreensConfig.Screen.PreFare do
             evergreen_content: [],
             content_summary: nil,
             cr_departures: CRDepartures.from_json(:default),
-            shuttle_bus_info: ShuttleBusInfo.from_json(:default)
+            shuttle_bus_info: ShuttleBusInfo.from_json(:default),
+            departures: nil
 
   use ScreensConfig.Struct,
     children: [
@@ -50,11 +54,13 @@ defmodule ScreensConfig.Screen.PreFare do
       reconstructed_alert_widget: CurrentStopId,
       content_summary: ContentSummary,
       cr_departures: CRDepartures,
-      shuttle_bus_info: ShuttleBusInfo
+      shuttle_bus_info: ShuttleBusInfo,
+      departures: Departures
     ]
 
   defp value_from_json("template", "duo"), do: :duo
   defp value_from_json("template", "solo"), do: :solo
+  defp value_from_json(_, value), do: value
 
   defp value_to_json(_, value), do: value
 end
