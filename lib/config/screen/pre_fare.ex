@@ -1,23 +1,22 @@
 defmodule ScreensConfig.Screen.PreFare do
   @moduledoc false
 
-  alias ScreensConfig.Departures
-
   alias ScreensConfig.{
+    Alerts,
     ContentSummary,
     CRDepartures,
+    Departures,
     ElevatorStatus,
     EvergreenContentItem,
     FullLineMap,
+    Header,
     ShuttleBusInfo
   }
 
-  alias ScreensConfig.Header.CurrentStopId
-
   @type t :: %__MODULE__{
           template: :duo | :solo,
-          header: CurrentStopId.t(),
-          reconstructed_alert_widget: CurrentStopId.t(),
+          header: Header.t(),
+          reconstructed_alert_widget: Alerts.t(),
           elevator_status: ElevatorStatus.t(),
           full_line_map: list(FullLineMap.t()),
           evergreen_content: list(EvergreenContentItem.t()),
@@ -47,16 +46,17 @@ defmodule ScreensConfig.Screen.PreFare do
 
   use ScreensConfig.Struct,
     children: [
-      header: CurrentStopId,
       elevator_status: ElevatorStatus,
       full_line_map: {:list, FullLineMap},
       evergreen_content: {:list, EvergreenContentItem},
-      reconstructed_alert_widget: CurrentStopId,
+      reconstructed_alert_widget: Alerts,
       content_summary: ContentSummary,
       cr_departures: CRDepartures,
       shuttle_bus_info: ShuttleBusInfo,
       departures: Departures
     ]
+
+  use Header
 
   defp value_from_json("template", "duo"), do: :duo
   defp value_from_json("template", "solo"), do: :solo

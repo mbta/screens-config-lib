@@ -2,13 +2,12 @@ defmodule ScreensConfig.Screen.BusShelter do
   @moduledoc false
   # credo:disable-for-this-file Credo.Check.Design.DuplicatedCode
 
-  alias ScreensConfig.{Alerts, Audio, Departures, EvergreenContentItem, Footer, Survey}
-  alias ScreensConfig.Header.{CurrentStopId, CurrentStopName}
+  alias ScreensConfig.{Alerts, Audio, Departures, EvergreenContentItem, Footer, Header, Survey}
 
   @type t :: %__MODULE__{
           departures: Departures.t(),
           footer: Footer.t(),
-          header: CurrentStopId.t() | CurrentStopName.t(),
+          header: Header.t(),
           alerts: Alerts.t(),
           evergreen_content: list(EvergreenContentItem.t()),
           survey: Survey.t(),
@@ -34,29 +33,5 @@ defmodule ScreensConfig.Screen.BusShelter do
       audio: Audio
     ]
 
-  defp value_from_json("header", %{"type" => "current_stop_id"} = header) do
-    CurrentStopId.from_json(header)
-  end
-
-  defp value_from_json("header", %{"type" => "current_stop_name"} = header) do
-    CurrentStopName.from_json(header)
-  end
-
-  # Fallback for previous config definition that only allowed CurrentStopId
-  # and did not specify header type
-  defp value_from_json("header", header) do
-    CurrentStopId.from_json(header)
-  end
-
-  defp value_to_json(:header, %CurrentStopId{} = header) do
-    header
-    |> CurrentStopId.to_json()
-    |> Map.put(:type, :current_stop_id)
-  end
-
-  defp value_to_json(:header, %CurrentStopName{} = header) do
-    header
-    |> CurrentStopName.to_json()
-    |> Map.put(:type, :current_stop_name)
-  end
+  use Header
 end
