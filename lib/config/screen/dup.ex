@@ -1,11 +1,10 @@
 defmodule ScreensConfig.Screen.Dup do
   @moduledoc false
 
-  alias ScreensConfig.Header.{CurrentStopId, CurrentStopName}
-  alias ScreensConfig.{Alerts, Departures, EvergreenContentItem}
+  alias ScreensConfig.{Alerts, Departures, EvergreenContentItem, Header}
 
   @type t :: %__MODULE__{
-          header: CurrentStopId.t() | CurrentStopName.t(),
+          header: Header.t(),
           evergreen_content: list(EvergreenContentItem.t()),
           primary_departures: Departures.t(),
           secondary_departures: Departures.t(),
@@ -23,19 +22,5 @@ defmodule ScreensConfig.Screen.Dup do
       evergreen_content: {:list, EvergreenContentItem}
     ]
 
-  defp value_from_json("header", %{"stop_name" => _} = header) do
-    CurrentStopName.from_json(header)
-  end
-
-  defp value_from_json("header", %{"stop_id" => _} = header) do
-    CurrentStopId.from_json(header)
-  end
-
-  defp value_to_json(:header, %CurrentStopId{} = header) do
-    CurrentStopId.to_json(header)
-  end
-
-  defp value_to_json(:header, %CurrentStopName{} = header) do
-    CurrentStopName.to_json(header)
-  end
+  use Header
 end

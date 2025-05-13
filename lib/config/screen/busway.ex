@@ -12,12 +12,12 @@ defmodule ScreensConfig.Screen.Busway do
   """
 
   alias ScreensConfig.{Departures, EvergreenContentItem}
-  alias ScreensConfig.Header.CurrentStopName
+  alias ScreensConfig.Header
 
   @type t :: %__MODULE__{
           departures: Departures.t(),
           evergreen_content: list(EvergreenContentItem.t()),
-          header: CurrentStopName.t()
+          header: Header.t()
         }
 
   @enforce_keys [:departures, :header]
@@ -26,7 +26,8 @@ defmodule ScreensConfig.Screen.Busway do
   use ScreensConfig.Struct,
     children: [
       departures: Departures,
-      evergreen_content: {:list, EvergreenContentItem},
-      header: CurrentStopName
+      evergreen_content: {:list, EvergreenContentItem}
     ]
+
+  use Header
 end
