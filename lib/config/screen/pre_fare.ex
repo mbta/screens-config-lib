@@ -9,8 +9,7 @@ defmodule ScreensConfig.Screen.PreFare do
     ElevatorStatus,
     EvergreenContentItem,
     FullLineMap,
-    Header,
-    ShuttleBusInfo
+    Header
   }
 
   @type t :: %__MODULE__{
@@ -22,7 +21,6 @@ defmodule ScreensConfig.Screen.PreFare do
           evergreen_content: list(EvergreenContentItem.t()),
           content_summary: ContentSummary.t(),
           cr_departures: CRDepartures.t(),
-          shuttle_bus_info: ShuttleBusInfo.t(),
           departures: Departures.t() | nil
         }
 
@@ -41,7 +39,6 @@ defmodule ScreensConfig.Screen.PreFare do
             evergreen_content: [],
             content_summary: nil,
             cr_departures: CRDepartures.from_json(:default),
-            shuttle_bus_info: ShuttleBusInfo.from_json(:default),
             departures: nil
 
   use ScreensConfig.Struct,
@@ -52,7 +49,6 @@ defmodule ScreensConfig.Screen.PreFare do
       reconstructed_alert_widget: Alerts,
       content_summary: ContentSummary,
       cr_departures: CRDepartures,
-      shuttle_bus_info: ShuttleBusInfo,
       departures: Departures
     ]
 
