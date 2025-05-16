@@ -2,13 +2,13 @@ defmodule ScreensConfig.Screen.BusEink do
   @moduledoc false
   # credo:disable-for-this-file Credo.Check.Design.DuplicatedCode
 
-  alias ScreensConfig.{Alerts, Departures, EvergreenContentItem, Footer, Header}
+  alias ScreensConfig.{Departures, EvergreenContentItem, Footer, Header, MultiStopAlerts}
 
   @type t :: %__MODULE__{
           departures: Departures.t(),
           footer: Footer.t(),
           header: Header.t(),
-          alerts: Alerts.t(),
+          alerts: MultiStopAlerts.t(),
           evergreen_content: list(EvergreenContentItem.t())
         }
 
@@ -23,7 +23,7 @@ defmodule ScreensConfig.Screen.BusEink do
     children: [
       departures: Departures,
       footer: Footer,
-      alerts: Alerts,
+      alerts: MultiStopAlerts,
       evergreen_content: {:list, EvergreenContentItem}
     ]
 
