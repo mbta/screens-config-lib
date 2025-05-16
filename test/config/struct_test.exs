@@ -112,6 +112,21 @@ defmodule TEST.Config9 do
   defp value_to_json(:a, value), do: value
 end
 
+defmodule TEST.Migration do
+  @type t :: %__MODULE__{b: String.t(), c: :one | :two}
+
+  defstruct b: "", c: ""
+
+  use ScreensConfig.Struct
+
+  defp migrate_json(%{"a" => value}), do: %{"b" => value, "c" => "one"}
+
+  defp value_from_json("c", "one"), do: :one
+  defp value_from_json("c", "two"), do: :two
+  defp value_from_json(_, value), do: value
+  defp value_to_json(_, value), do: value
+end
+
 defmodule ScreensConfig.StructTest do
   use ExUnit.Case, async: true
 
@@ -206,6 +221,10 @@ defmodule ScreensConfig.StructTest do
       original_json2 = %{"a" => "foo", "b" => true}
 
       assert_raise FunctionClauseError, fn -> Config9.from_json(original_json2) end
+    end
+
+    test "allows loading a previous JSON format when migrate_json/2 is defined" do
+      assert TEST.Migration.from_json(%{"a" => "test"}) == %TEST.Migration{b: "test", c: :one}
     end
   end
 end

@@ -1,30 +1,39 @@
 defmodule ScreensConfig.Struct do
   @moduledoc """
-  A `use`-able convenience macro that generates boilerplate code for
-  a JSON-serializable config struct. Modules that use this will automatically
-  adopt `ScreensConfig.Behaviour`.
+  A `use`-able convenience macro that generates boilerplate code for a JSON-serializable config
+  struct. Modules that use this will automatically adopt `ScreensConfig.Behaviour`.
 
-  This can be used for most config modules that define structs
-  and have straightforward serialization logic.
+  This can be used for most config modules that define structs and have straightforward
+  serialization logic.
 
   ## Options
 
-    * `:with_default` - set true to have the generated `from_json/1` accept `:default` as an argument.
-      Default false.
+    * `:with_default` - set true to have the generated `from_json/1` accept `:default` as an
+      argument. Default false.
 
     * `:children` - pass a keyword list of `{struct_key, child | {:list, child} | {:map, child}}`,
       where `child` is a module that adopts `ScreensConfig.Behaviour`.
 
-  In the using module, you MUST define the following:
+  The using module MUST define the following:
 
     * A struct
 
     * A `t()` type definition for the struct
 
-    * Clauses of `value_from_json/2` and `value_to_json/2` for struct fields not described in the `:children` opt,
-      as well as any `:children` fields that are nullable.
+    * Clauses of `value_from_json/2` and `value_to_json/2` for struct fields not described in the
+      `:children` opt, as well as any `:children` fields that are nullable
 
     * Any other fallback clauses of `value_from_json/2` and `value_to_json/2`
+
+  ## Migrations
+
+  The using module may define a `migrate_json/1`, which is called in `from_json/1` before any
+  deserialization is done; it receives the entire JSON map, and should return the same. This
+  provides an opportunity to "migrate" configuration in an otherwise backwards-incompatible way,
+  for example renaming a field:
+
+      defp migrate_json(%{"old_name" => value} = json), do: Map.put(json, "new_name", value)
+      defp migrate_json(other), do: other
   """
 
   @type opt ::
@@ -53,6 +62,7 @@ defmodule ScreensConfig.Struct do
       def from_json(%{} = json) do
         struct_map =
           json
+          |> migrate_json()
           |> Map.take(Util.struct_keys(__MODULE__))
           |> Enum.into(%{}, fn {k, v} -> {String.to_existing_atom(k), _value_from_json(k, v)} end)
 
@@ -104,6 +114,8 @@ defmodule ScreensConfig.Struct do
         end
       end
 
+      defp migrate_json(json), do: json
+
       defp _value_from_json(key, value), do: value_from_json(key, value)
 
       defp _value_to_json(key, value), do: value_to_json(key, value)
@@ -116,7 +128,11 @@ defmodule ScreensConfig.Struct do
         raise "#{__MODULE__}.value_to_json/2 not implemented (key: `#{key}`)"
       end
 
-      defoverridable from_json: 1, to_json: 1, value_from_json: 2, value_to_json: 2
+      defoverridable from_json: 1,
+                     migrate_json: 1,
+                     to_json: 1,
+                     value_from_json: 2,
+                     value_to_json: 2
     end
   end
 end
