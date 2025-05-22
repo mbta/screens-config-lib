@@ -30,7 +30,7 @@ defmodule ScreensConfig.Screen.Elevator do
       evergreen_content: {:list, EvergreenContentItem}
     ]
 
+  defp value_from_json("accessible_path_direction_arrow", value), do: Arrow.from_json(value)
   defp value_from_json(_, value), do: value
-
   defp value_to_json(_, value), do: value
 end
