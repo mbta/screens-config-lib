@@ -26,9 +26,7 @@ defmodule ScreensConfig.Departures.Header do
 
   use ScreensConfig.Struct, with_default: true
 
-  defp value_from_json("arrow", value) when value in ~w(n ne e se s sw w nw),
-    do: String.to_existing_atom(value)
-
+  defp value_from_json("arrow", value), do: Arrow.from_json(value)
   defp value_from_json(_, value), do: value
   defp value_to_json(_, value), do: value
 end
