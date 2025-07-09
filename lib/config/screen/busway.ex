@@ -17,11 +17,12 @@ defmodule ScreensConfig.Screen.Busway do
   @type t :: %__MODULE__{
           departures: Departures.t(),
           evergreen_content: list(EvergreenContentItem.t()),
-          header: Header.t()
+          header: Header.t(),
+          include_logo_in_header: boolean()
         }
 
   @enforce_keys [:departures, :header]
-  defstruct departures: nil, evergreen_content: [], header: nil
+  defstruct departures: nil, evergreen_content: [], header: nil, include_logo_in_header: false
 
   use ScreensConfig.Struct,
     children: [
@@ -30,4 +31,7 @@ defmodule ScreensConfig.Screen.Busway do
     ]
 
   use Header
+
+  defp value_from_json(_, value), do: value
+  defp value_to_json(_, value), do: value
 end
