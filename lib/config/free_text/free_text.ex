@@ -23,8 +23,8 @@ defmodule ScreensConfig.FreeText do
           | :green_c
           | :green_d
           | :green_e
-          | :capeflyer
           | :ferry
+          | :capeflyer
   @type color :: :red | :blue | :orange | :green | :silver | :purple | :teal | :ocean_blue
   @type special :: :break
 
