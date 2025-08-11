@@ -23,7 +23,9 @@ defmodule ScreensConfig.FreeText do
           | :green_c
           | :green_d
           | :green_e
-  @type color :: :red | :blue | :orange | :green | :silver | :purple
+          | :ferry
+          | :capeflyer
+  @type color :: :red | :blue | :orange | :green | :silver | :purple | :teal | :ocean_blue
   @type special :: :break
 
   @spec to_plaintext(t()) :: String.t() | nil
@@ -39,6 +41,8 @@ defmodule ScreensConfig.FreeText do
   def to_plaintext(%{route: :green_c}), do: "Green Line - C branch"
   def to_plaintext(%{route: :green_d}), do: "Green Line - D branch"
   def to_plaintext(%{route: :green_e}), do: "Green Line - E branch"
+  def to_plaintext(%{route: :ferry}), do: "Ferry"
+  def to_plaintext(%{route: :capeflyer}), do: "CapeFlyer"
 
   def to_plaintext(%{format: _, text: text}), do: text
 
