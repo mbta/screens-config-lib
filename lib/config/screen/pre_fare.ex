@@ -4,7 +4,6 @@ defmodule ScreensConfig.Screen.PreFare do
   alias ScreensConfig.{
     Alerts,
     ContentSummary,
-    CRDepartures,
     Departures,
     ElevatorStatus,
     EvergreenContentItem,
@@ -20,7 +19,6 @@ defmodule ScreensConfig.Screen.PreFare do
           full_line_map: list(FullLineMap.t()),
           evergreen_content: list(EvergreenContentItem.t()),
           content_summary: ContentSummary.t(),
-          cr_departures: CRDepartures.t(),
           departures: Departures.t() | nil
         }
 
@@ -38,7 +36,6 @@ defmodule ScreensConfig.Screen.PreFare do
             full_line_map: [],
             evergreen_content: [],
             content_summary: nil,
-            cr_departures: CRDepartures.from_json(:default),
             departures: nil
 
   use ScreensConfig.Struct,
@@ -48,7 +45,6 @@ defmodule ScreensConfig.Screen.PreFare do
       evergreen_content: {:list, EvergreenContentItem},
       reconstructed_alert_widget: Alerts,
       content_summary: ContentSummary,
-      cr_departures: CRDepartures,
       departures: Departures
     ]
 
