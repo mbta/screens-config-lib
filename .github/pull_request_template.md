@@ -1,3 +1,3 @@
-**Asana task**: [title](url)
+**Asana task:** [title](url)
 
 Description
