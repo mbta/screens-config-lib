@@ -1,15 +1,13 @@
 defmodule ScreensConfig.EvergreenContentItem do
   @moduledoc false
 
-  alias ScreensConfig.RecurrentSchedule
-  alias ScreensConfig.Schedule
-  alias ScreensConfig.WidgetInstance
+  alias ScreensConfig.{AlertSchedule, RecurrentSchedule, Schedule, WidgetInstance}
 
   @type t :: %__MODULE__{
           slot_names: list(WidgetInstance.slot_id()),
           asset_path: String.t(),
           priority: WidgetInstance.priority(),
-          schedule: list(Schedule.t()) | RecurrentSchedule.t(),
+          schedule: list(Schedule.t()) | RecurrentSchedule.t() | AlertSchedule.t(),
           text_for_audio: String.t(),
           audio_priority: WidgetInstance.priority()
         }
@@ -28,8 +26,12 @@ defmodule ScreensConfig.EvergreenContentItem do
     Enum.map(datetime_periods, &Schedule.from_json/1)
   end
 
-  defp value_from_json("schedule", dates_and_times) when is_map(dates_and_times) do
+  defp value_from_json("schedule", %{"dates" => _, "times" => _} = dates_and_times) do
     RecurrentSchedule.from_json(dates_and_times)
+  end
+
+  defp value_from_json("schedule", %{"alert_ids" => _} = alert_schedule) do
+    AlertSchedule.from_json(alert_schedule)
   end
 
   defp value_from_json(_, value), do: value
@@ -38,9 +40,7 @@ defmodule ScreensConfig.EvergreenContentItem do
     Enum.map(datetime_periods, &Schedule.to_json/1)
   end
 
-  defp value_to_json(:schedule, dates_and_times) when is_map(dates_and_times) do
-    RecurrentSchedule.to_json(dates_and_times)
-  end
+  defp value_to_json(:schedule, %struct{} = schedule), do: struct.to_json(schedule)
 
   defp value_to_json(_, value), do: value
 end
