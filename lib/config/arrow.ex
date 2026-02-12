@@ -3,10 +3,10 @@ defmodule ScreensConfig.Arrow do
   Represents an arrow direction to be displayed on screens.
   """
 
-  @type t :: :n | :ne | :e | :se | :s | :sw | :w | :nw | :uturn | nil
+  @type t :: :n | :ne | :e | :se | :s | :sw | :w | :nw | nil
 
   @spec from_json(String.t() | nil) :: t()
-  for atom <- ~w(n ne e se s sw w nw uturn)a do
+  for atom <- ~w(n ne e se s sw w nw)a do
     def from_json(unquote(to_string(atom))), do: unquote(atom)
   end
 
