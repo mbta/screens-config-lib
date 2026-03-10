@@ -81,36 +81,39 @@ defmodule ScreensConfig.Struct do
         |> Enum.into(%{}, fn {k, v} -> {k, _value_to_json(k, v)} end)
       end
 
-      for {key, child_module} <- children do
+      for {key, {:list, module}} <- children do
         string_key = Atom.to_string(key)
 
-        case child_module do
-          {:list, module} ->
-            defp _value_from_json(unquote(string_key), values) when is_list(values) do
-              Enum.map(values, &unquote(module).from_json/1)
-            end
+        defp _value_from_json(unquote(string_key), values) when is_list(values) do
+          Enum.map(values, &unquote(module).from_json/1)
+        end
 
-            defp _value_to_json(unquote(key), values) do
-              Enum.map(values, &unquote(module).to_json/1)
-            end
+        defp _value_to_json(unquote(key), values) do
+          Enum.map(values, &unquote(module).to_json/1)
+        end
+      end
 
-          {:map, module} ->
-            defp _value_from_json(unquote(string_key), value_map) when is_map(value_map) do
-              Enum.into(value_map, %{}, fn {k, v} -> {k, unquote(module).from_json(v)} end)
-            end
+      for {key, {:map, module}} <- children do
+        string_key = Atom.to_string(key)
 
-            defp _value_to_json(unquote(key), value_map) do
-              Enum.into(value_map, %{}, fn {k, v} -> {k, unquote(module).to_json(v)} end)
-            end
+        defp _value_from_json(unquote(string_key), value_map) when is_map(value_map) do
+          Enum.into(value_map, %{}, fn {k, v} -> {k, unquote(module).from_json(v)} end)
+        end
 
-          module ->
-            defp _value_from_json(unquote(string_key), value) when not is_nil(value) do
-              unquote(module).from_json(value)
-            end
+        defp _value_to_json(unquote(key), value_map) do
+          Enum.into(value_map, %{}, fn {k, v} -> {k, unquote(module).to_json(v)} end)
+        end
+      end
 
-            defp _value_to_json(unquote(key), value) when not is_nil(value) do
-              unquote(module).to_json(value)
-            end
+      for {key, module} <- children, not is_tuple(module) do
+        string_key = Atom.to_string(key)
+
+        defp _value_from_json(unquote(string_key), value) when not is_nil(value) do
+          unquote(module).from_json(value)
+        end
+
+        defp _value_to_json(unquote(key), value) when not is_nil(value) do
+          unquote(module).to_json(value)
         end
       end
 
