@@ -8,7 +8,8 @@ defmodule ScreensConfig.Screen.PreFare do
     ElevatorStatus,
     EvergreenContentItem,
     FullLineMap,
-    Header
+    Header,
+    Wayfinding
   }
 
   @type t :: %__MODULE__{
@@ -19,7 +20,8 @@ defmodule ScreensConfig.Screen.PreFare do
           full_line_map: list(FullLineMap.t()),
           evergreen_content: list(EvergreenContentItem.t()),
           content_summary: ContentSummary.t(),
-          departures: Departures.t() | nil
+          departures: Departures.t() | nil,
+          wayfinding: Wayfinding.t() | nil
         }
 
   @enforce_keys [
@@ -36,7 +38,8 @@ defmodule ScreensConfig.Screen.PreFare do
             full_line_map: [],
             evergreen_content: [],
             content_summary: nil,
-            departures: nil
+            departures: nil,
+            wayfinding: nil
 
   use ScreensConfig.Struct,
     children: [
@@ -45,7 +48,8 @@ defmodule ScreensConfig.Screen.PreFare do
       evergreen_content: {:list, EvergreenContentItem},
       reconstructed_alert_widget: Alerts,
       content_summary: ContentSummary,
-      departures: Departures
+      departures: Departures,
+      wayfinding: Wayfinding
     ]
 
   use Header
