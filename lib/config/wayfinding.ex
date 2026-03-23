@@ -5,13 +5,13 @@ defmodule ScreensConfig.Wayfinding do
 
   @type t :: %__MODULE__{
           asset_url: String.t(),
-          placement: placement() | nil,
+          placement: placement(),
           header_text: String.t() | nil,
           text_for_audio: String.t() | nil
         }
 
   @enforce_keys ~w[asset_url]a
-  defstruct [:placement, :header_text, :text_for_audio, asset_url: ""]
+  defstruct [:header_text, :text_for_audio, placement: :top, asset_url: ""]
 
   use ScreensConfig.Struct
 
