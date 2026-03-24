@@ -1,10 +1,27 @@
 version: 2
 updates:
+- package-ecosystem: github-actions
+  directory: "/"
+  schedule:
+    interval: "weekly"
+    day: "monday"
+    time: "10:00"
+  cooldown:
+    default-days: 7
+  open-pull-requests-limit: 5
 - package-ecosystem: mix
   directory: "/"
   schedule:
-    interval: weekly
+    interval: "weekly"
+    day: "monday"
     time: "10:00"
   cooldown:
       default-days: 7
   open-pull-requests-limit: 10
+  groups:
+    mix-minor:
+      patterns:
+        - "*"
+      update-types:
+        - "patch"
+        - "minor"
