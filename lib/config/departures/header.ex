@@ -1,28 +1,29 @@
 defmodule ScreensConfig.Departures.Header do
   @moduledoc """
-  Configures the header of a `Section`.
+  Configures the header of a `Section`. All elements of a header are optional and can be omitted
+  by setting them to `nil`.
 
   - `title` is the displayed title of the section.
-  - `arrow` is the direction of an arrow displayed in the header, for wayfinding. This uses 8-way
+  - `arrow` is the direction of a wayfinding arrow displayed alongside the title. This uses 8-way
     compass directions where "n" is towards the top of the display.
+  - `image_path` is the path of an image displayed below the title (if present).
+  - `subtitle` is an additional text element with less visual prominence, primarily intended for
+    wayfinding directions.
   - `read_as` is how the section should be announced in audio readouts. If `nil`, defaults to the
-    configured `title`.
-  - `subtitle` is a String that sets a subheading, initially intended for wayfinding directions,
-    but usable for other types of subheadings. If `nil`, defaults to not including the subheading.
-
-  If `title` is not set, there is no visual header, but `read_as` is still read out, if set.
+    configured `title` plus `subtitle`. This applies even if the header has no visual components.
   """
 
   alias ScreensConfig.Arrow
 
   @type t :: %__MODULE__{
           arrow: Arrow.t(),
+          image_path: String.t() | nil,
           read_as: String.t() | nil,
           subtitle: String.t() | nil,
           title: String.t() | nil
         }
 
-  defstruct [:arrow, :read_as, :subtitle, :title]
+  defstruct [:arrow, :image_path, :read_as, :subtitle, :title]
 
   use ScreensConfig.Struct, with_default: true
 
