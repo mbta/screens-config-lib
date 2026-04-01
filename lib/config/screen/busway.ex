@@ -11,18 +11,22 @@ defmodule ScreensConfig.Screen.Busway do
   typically split into multiple sections.
   """
 
-  alias ScreensConfig.{Departures, EvergreenContentItem}
-  alias ScreensConfig.Header
+  alias ScreensConfig.{Departures, EvergreenContentItem, Header, InOut}
 
   @type t :: %__MODULE__{
           departures: Departures.t(),
           evergreen_content: list(EvergreenContentItem.t()),
           header: Header.t(),
-          include_logo_in_header: boolean()
+          include_logo_in_header: boolean(),
+          in_out: InOut.t()
         }
 
   @enforce_keys [:departures, :header]
-  defstruct departures: nil, evergreen_content: [], header: nil, include_logo_in_header: false
+  defstruct departures: nil,
+            evergreen_content: [],
+            header: nil,
+            include_logo_in_header: false,
+            in_out: nil
 
   use ScreensConfig.Struct,
     children: [
@@ -32,6 +36,7 @@ defmodule ScreensConfig.Screen.Busway do
 
   use Header
 
+  defp value_from_json("in_out", value), do: InOut.from_json(value)
   defp value_from_json(_, value), do: value
   defp value_to_json(_, value), do: value
 end

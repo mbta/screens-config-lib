@@ -1,7 +1,7 @@
 defmodule ScreensConfig.Screen.Dup do
   @moduledoc false
 
-  alias ScreensConfig.{Alerts, Departures, EvergreenContentItem, Header.InOut}
+  alias ScreensConfig.{Alerts, Departures, EvergreenContentItem, Header, InOut}
 
   @type t :: %__MODULE__{
           header: Header.t(),
@@ -25,4 +25,7 @@ defmodule ScreensConfig.Screen.Dup do
     ]
 
   use Header
+
+  defp value_from_json("in_out", value), do: InOut.from_json(value)
+  defp value_to_json(_, value), do: value
 end

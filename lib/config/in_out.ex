@@ -3,13 +3,13 @@ defmodule ScreensConfig.InOut do
 
   @type t :: :inside | :outside | nil
 
-  defp value_from_json("platform_location", location) do
-    case location do
+  def from_json(in_out) do
+    case in_out do
       "inside" -> :inside
       "outside" -> :outside
       _ -> nil
     end
   end
 
-  defp value_to_json(_, value), do: value
+  def to_json(value), do: value
 end

@@ -8,7 +8,8 @@ defmodule ScreensConfig.Screen.PreFare do
     ElevatorStatus,
     EvergreenContentItem,
     FullLineMap,
-    Header
+    Header,
+    InOut
   }
 
   @type t :: %__MODULE__{
@@ -19,7 +20,8 @@ defmodule ScreensConfig.Screen.PreFare do
           full_line_map: list(FullLineMap.t()),
           evergreen_content: list(EvergreenContentItem.t()),
           content_summary: ContentSummary.t(),
-          departures: Departures.t() | nil
+          departures: Departures.t() | nil,
+          in_out: InOut.t()
         }
 
   @enforce_keys [
@@ -36,7 +38,8 @@ defmodule ScreensConfig.Screen.PreFare do
             full_line_map: [],
             evergreen_content: [],
             content_summary: nil,
-            departures: nil
+            departures: nil,
+            in_out: nil
 
   use ScreensConfig.Struct,
     children: [
@@ -52,6 +55,7 @@ defmodule ScreensConfig.Screen.PreFare do
 
   defp value_from_json("template", "duo"), do: :duo
   defp value_from_json("template", "solo"), do: :solo
+  defp value_from_json("in_out", value), do: InOut.from_json(value)
   defp value_from_json(_, value), do: value
 
   defp value_to_json(_, value), do: value
