@@ -6,10 +6,10 @@ defmodule ScreensConfig.Screen.PreFare do
     ContentSummary,
     Departures,
     ElevatorStatus,
+    EmergencyMessagingLocation,
     EvergreenContentItem,
     FullLineMap,
-    Header,
-    InOut
+    Header
   }
 
   @type t :: %__MODULE__{
@@ -21,7 +21,7 @@ defmodule ScreensConfig.Screen.PreFare do
           evergreen_content: list(EvergreenContentItem.t()),
           content_summary: ContentSummary.t(),
           departures: Departures.t() | nil,
-          in_out: InOut.t()
+          emergency_messaging_location: EmergencyMessagingLocation.t()
         }
 
   @enforce_keys [
@@ -39,7 +39,7 @@ defmodule ScreensConfig.Screen.PreFare do
             evergreen_content: [],
             content_summary: nil,
             departures: nil,
-            in_out: nil
+            emergency_messaging_location: nil
 
   use ScreensConfig.Struct,
     children: [
@@ -55,7 +55,10 @@ defmodule ScreensConfig.Screen.PreFare do
 
   defp value_from_json("template", "duo"), do: :duo
   defp value_from_json("template", "solo"), do: :solo
-  defp value_from_json("in_out", value), do: InOut.from_json(value)
+
+  defp value_from_json("emergency_messaging_location", value),
+    do: EmergencyMessagingLocation.from_json(value)
+
   defp value_from_json(_, value), do: value
 
   defp value_to_json(_, value), do: value
