@@ -1,7 +1,7 @@
 defmodule ScreensConfig.EmergencyMessagingLocation do
   @moduledoc """
-  This field indicates whether the screen is located inside or outside the station
-  for the Emergency Message configuration purposes.
+  This field indicates whether the screen is located inside or outside the station.
+  Used when configuring Emergency Messaging content, which can vary based on this value.
   """
 
   @type t :: :inside | :outside | nil
