@@ -11,10 +11,17 @@ defmodule ScreensConfig.Screen.Busway do
   typically split into multiple sections.
   """
 
-  alias ScreensConfig.{Departures, EmergencyMessagingLocation, EvergreenContentItem, Header}
+  alias ScreensConfig.{
+    Departures,
+    EmergencyMessagingLocation,
+    EmergencyTakeover,
+    EvergreenContentItem,
+    Header
+  }
 
   @type t :: %__MODULE__{
           departures: Departures.t(),
+          emergency_takeover: EmergencyTakeover.t() | nil,
           emergency_messaging_location: EmergencyMessagingLocation.t(),
           evergreen_content: list(EvergreenContentItem.t()),
           header: Header.t(),
@@ -24,6 +31,7 @@ defmodule ScreensConfig.Screen.Busway do
   @enforce_keys [:departures, :header]
   defstruct departures: nil,
             emergency_messaging_location: nil,
+            emergency_takeover: nil,
             evergreen_content: [],
             header: nil,
             include_logo_in_header: false
@@ -31,7 +39,8 @@ defmodule ScreensConfig.Screen.Busway do
   use ScreensConfig.Struct,
     children: [
       departures: Departures,
-      evergreen_content: {:list, EvergreenContentItem}
+      evergreen_content: {:list, EvergreenContentItem},
+      emergency_takeover: EmergencyTakeover
     ]
 
   use Header

@@ -7,6 +7,7 @@ defmodule ScreensConfig.Screen.PreFare do
     Departures,
     ElevatorStatus,
     EmergencyMessagingLocation,
+    EmergencyTakeover,
     EvergreenContentItem,
     FullLineMap,
     Header
@@ -21,7 +22,8 @@ defmodule ScreensConfig.Screen.PreFare do
           evergreen_content: list(EvergreenContentItem.t()),
           content_summary: ContentSummary.t(),
           departures: Departures.t() | nil,
-          emergency_messaging_location: EmergencyMessagingLocation.t()
+          emergency_messaging_location: EmergencyMessagingLocation.t(),
+          emergency_takeover: EmergencyTakeover.t() | nil
         }
 
   @enforce_keys [
@@ -39,7 +41,8 @@ defmodule ScreensConfig.Screen.PreFare do
             evergreen_content: [],
             content_summary: nil,
             departures: nil,
-            emergency_messaging_location: nil
+            emergency_messaging_location: nil,
+            emergency_takeover: nil
 
   use ScreensConfig.Struct,
     children: [
@@ -48,7 +51,8 @@ defmodule ScreensConfig.Screen.PreFare do
       evergreen_content: {:list, EvergreenContentItem},
       reconstructed_alert_widget: Alerts,
       content_summary: ContentSummary,
-      departures: Departures
+      departures: Departures,
+      emergency_takeover: EmergencyTakeover
     ]
 
   use Header
