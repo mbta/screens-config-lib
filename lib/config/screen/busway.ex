@@ -25,7 +25,9 @@ defmodule ScreensConfig.Screen.Busway do
           emergency_messaging_location: EmergencyMessagingLocation.t(),
           evergreen_content: list(EvergreenContentItem.t()),
           header: Header.t(),
-          include_logo_in_header: boolean()
+          include_logo_in_header: boolean(),
+          secondary_departures: Departures.t() | nil,
+          template: :duo | :solo
         }
 
   @enforce_keys [:departures, :header]
@@ -34,7 +36,9 @@ defmodule ScreensConfig.Screen.Busway do
             emergency_takeover: nil,
             evergreen_content: [],
             header: nil,
-            include_logo_in_header: false
+            include_logo_in_header: false,
+            secondary_departures: nil,
+            template: :solo
 
   use ScreensConfig.Struct,
     children: [
@@ -47,6 +51,9 @@ defmodule ScreensConfig.Screen.Busway do
 
   defp value_from_json("emergency_messaging_location", value),
     do: EmergencyMessagingLocation.from_json(value)
+
+  defp value_from_json("template", "duo"), do: :duo
+  defp value_from_json("template", "solo"), do: :solo
 
   defp value_from_json(_, value), do: value
   defp value_to_json(_, value), do: value
