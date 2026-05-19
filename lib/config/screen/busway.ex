@@ -44,7 +44,8 @@ defmodule ScreensConfig.Screen.Busway do
     children: [
       departures: Departures,
       evergreen_content: {:list, EvergreenContentItem},
-      emergency_takeover: EmergencyTakeover
+      emergency_takeover: EmergencyTakeover,
+      secondary_departures: Departures
     ]
 
   use Header
