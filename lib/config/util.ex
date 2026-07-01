@@ -10,6 +10,7 @@ defmodule ScreensConfig.Util do
   def struct_keys(mod, opts \\ []) do
     keys =
       mod
+      |> struct()
       |> Map.from_struct()
       |> Map.keys()
 

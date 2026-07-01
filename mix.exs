@@ -5,7 +5,7 @@ defmodule ScreensConfig.MixProject do
     [
       app: :screens_config,
       version: "0.1.0",
-      elixir: "~> 1.17",
+      elixir: "~> 1.20",
       start_permanent: Mix.env() == :prod,
       deps: deps()
     ]
@@ -23,7 +23,7 @@ defmodule ScreensConfig.MixProject do
     [
       {:jason, "~> 1.0"},
       {:credo, "~> 1.7.6", only: [:dev, :test]},
-      {:dialyxir, "~> 1.4.3", only: [:dev, :test], runtime: false}
+      {:dialyxir, "~> 1.4.7", only: [:dev, :test], runtime: false}
     ]
   end
 end
