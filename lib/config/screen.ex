@@ -75,7 +75,7 @@ defmodule ScreensConfig.Screen do
   end
 
   @spec schedule_refresh_at_time(t(), DateTime.t()) :: t()
-  def schedule_refresh_at_time(screen_config, time) do
+  def schedule_refresh_at_time(%__MODULE__{} = screen_config, time) do
     %__MODULE__{screen_config | refresh_if_loaded_before: time}
   end
 
