@@ -1,26 +1,20 @@
 defmodule ScreensConfig.Config do
   @moduledoc false
 
-  alias ScreensConfig.{Devops, Screen}
+  alias ScreensConfig.Screen
 
-  @type t :: %__MODULE__{
-          screens: %{
-            screen_id => Screen.t()
-          },
-          devops: Devops.t()
-        }
+  @type t :: %__MODULE__{screens: %{screen_id => Screen.t()}}
 
   @type screen_id :: String.t()
 
   @enforce_keys [:screens]
-  defstruct screens: nil,
-            devops: Devops.from_json(:default)
+  defstruct screens: nil
 
-  use ScreensConfig.Struct, children: [screens: {:map, Screen}, devops: Devops]
+  use ScreensConfig.Struct, children: [screens: {:map, Screen}]
 
   @spec schedule_refresh_for_screen_ids(t(), list(String.t()), DateTime.t()) :: t()
   def schedule_refresh_for_screen_ids(config, screen_ids, now \\ DateTime.utc_now()) do
-    %__MODULE__{screens: current_screens, devops: devops} = config
+    %__MODULE__{screens: current_screens} = config
 
     new_screens =
       current_screens
@@ -36,7 +30,7 @@ defmodule ScreensConfig.Config do
       end)
       |> Enum.into(%{})
 
-    %__MODULE__{screens: new_screens, devops: devops}
+    %__MODULE__{screens: new_screens}
   end
 
   defp value_from_json(_, value), do: value
