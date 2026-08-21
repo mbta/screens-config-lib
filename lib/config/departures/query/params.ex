@@ -2,16 +2,19 @@ defmodule ScreensConfig.Departures.Query.Params do
   @moduledoc false
   # credo:disable-for-this-file Credo.Check.Design.DuplicatedCode
 
+  alias ScreensConfig.Departures.Mode
   alias ScreensConfig.RouteType
 
   @type t :: %__MODULE__{
+          mode: Mode.t(),
           stop_ids: list(String.t()),
           route_ids: list(String.t()),
           direction_id: 0 | 1 | :both,
           route_type: RouteType.t() | nil
         }
 
-  defstruct stop_ids: [],
+  defstruct mode: nil,
+            stop_ids: [],
             route_ids: [],
             direction_id: :both,
             route_type: nil
@@ -22,6 +25,10 @@ defmodule ScreensConfig.Departures.Query.Params do
 
   defp value_from_json("route_type", route_type) when is_binary(route_type) do
     RouteType.from_string(route_type)
+  end
+
+  defp value_from_json("mode", mode) when is_binary(mode) do
+    ScreensConfig.Departures.Mode.from_string(mode)
   end
 
   defp value_from_json(_, value), do: value
