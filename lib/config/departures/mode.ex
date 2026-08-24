@@ -9,9 +9,14 @@ defmodule ScreensConfig.Departures.Mode do
   @light_rail_modes [:m, :gl]
   @bus_modes [:sl, :bus]
 
-  @spec from_string(String.t()) :: t() | nil
+  @spec from_json(String.t()) :: t() | nil
   for atom <- ~w(bl ol rl m gl sl bus cr ferry)a do
-    def from_string(unquote(to_string(atom))), do: unquote(atom)
+    def from_json(unquote(to_string(atom))), do: unquote(atom)
+  end
+
+  @spec to_json(atom()) :: String.t()
+  for atom <- ~w(bl ol rl m gl sl bus cr ferry)a do
+    def to_json(unquote(atom)), do: unquote(to_string(atom))
   end
 
   @spec to_route_type(t()) :: RouteType.t() | nil
