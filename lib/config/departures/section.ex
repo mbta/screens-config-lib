@@ -12,7 +12,7 @@ defmodule ScreensConfig.Departures.Section do
   alias ScreensConfig.Departures.{Filters, Header, Layout, Query}
 
   @type t :: %__MODULE__{
-          query: Query.t(),
+          query: Query.t() | nil,
           filters: Filters.t(),
           header: Header.t(),
           layout: Layout.t(),

@@ -7,7 +7,8 @@ defmodule ScreensConfig.Departures.Query do
           params: Params.t()
         }
 
-  defstruct params: Params.from_json(:default)
+  @enforce_keys [:params]
+  defstruct @enforce_keys
 
-  use ScreensConfig.Struct, with_default: true, children: [params: Params]
+  use ScreensConfig.Struct, children: [params: Params]
 end
