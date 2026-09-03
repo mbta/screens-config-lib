@@ -5,8 +5,6 @@ defmodule ScreensConfig.Departures.Section do
 
   - `bidirectional` enables a filter which enforces a maximum of 2 departures: the first that
     would normally be displayed, and the next one in the opposite direction, if there is one.
-  - `header_only, when true, disables fetching of departures so that only the header + subheader
-    of the section are shown. Defaults to false.
   """
 
   alias ScreensConfig.Departures.{Filters, Header, Layout, Query}
@@ -17,7 +15,6 @@ defmodule ScreensConfig.Departures.Section do
           header: Header.t(),
           layout: Layout.t(),
           bidirectional: boolean(),
-          header_only: boolean(),
           grouping_type: :time | :destination
         }
 
@@ -27,7 +24,6 @@ defmodule ScreensConfig.Departures.Section do
             header: Header.from_json(:default),
             layout: Layout.from_json(:default),
             bidirectional: false,
-            header_only: false,
             grouping_type: :time
 
   use ScreensConfig.Struct,
