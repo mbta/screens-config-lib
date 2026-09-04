@@ -5,9 +5,6 @@ defmodule ScreensConfig.Departures.Mode do
   """
   alias ScreensConfig.RouteType
   @type t :: :bl | :ol | :rl | :m | :gl | :sl | :bus | :cr | :ferry
-  @subway_modes [:bl, :ol, :rl]
-  @light_rail_modes [:m, :gl]
-  @bus_modes [:sl, :bus]
 
   @spec from_json(String.t()) :: t() | nil
   for atom <- ~w(bl ol rl m gl sl bus cr ferry)a do
@@ -19,15 +16,10 @@ defmodule ScreensConfig.Departures.Mode do
     def to_json(unquote(atom)), do: unquote(to_string(atom))
   end
 
-  @spec to_route_type(t()) :: RouteType.t() | nil
-  def to_route_type(mode) do
-    cond do
-      mode == :ferry -> :ferry
-      mode == :cr -> :rail
-      mode in @subway_modes -> :subway
-      mode in @light_rail_modes -> :light_rail
-      mode in @bus_modes -> :bus
-      true -> nil
-    end
-  end
+  @spec to_route_type(t()) :: RouteType.t()
+  def to_route_type(:ferry), do: :ferry
+  def to_route_type(:cr), do: :rail
+  def to_route_type(mode) when mode in [:bl, :ol, :rl], do: :subway
+  def to_route_type(mode) when mode in [:m, :gl], do: :light_rail
+  def to_route_type(mode) when mode in [:sl, :bus], do: :bus
 end
