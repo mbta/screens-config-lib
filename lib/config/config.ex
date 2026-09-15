@@ -12,27 +12,6 @@ defmodule ScreensConfig.Config do
 
   use ScreensConfig.Struct, children: [screens: {:map, Screen}]
 
-  @spec schedule_refresh_for_screen_ids(t(), list(String.t()), DateTime.t()) :: t()
-  def schedule_refresh_for_screen_ids(config, screen_ids, now \\ DateTime.utc_now()) do
-    %__MODULE__{screens: current_screens} = config
-
-    new_screens =
-      current_screens
-      |> Enum.map(fn {screen_id, screen_config} ->
-        new_screen_config =
-          if screen_id in screen_ids do
-            Screen.schedule_refresh_at_time(screen_config, now)
-          else
-            screen_config
-          end
-
-        {screen_id, new_screen_config}
-      end)
-      |> Enum.into(%{})
-
-    %__MODULE__{screens: new_screens}
-  end
-
   defp value_from_json(_, value), do: value
 
   defp value_to_json(_, value), do: value
