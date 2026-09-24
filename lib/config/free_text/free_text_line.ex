@@ -24,6 +24,7 @@ defmodule ScreensConfig.FreeTextLine do
           | :green_c
           | :green_d
           | :green_e
+          | pos_integer()
           | nil
 
   @derive Jason.Encoder
