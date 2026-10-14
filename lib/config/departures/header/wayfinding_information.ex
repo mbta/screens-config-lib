@@ -9,8 +9,8 @@ defmodule ScreensConfig.Departures.Header.WayfindingInformation do
      to be shown on the image set with `image_path`.
   """
 
-  alias ScreensConfig.{RecurrentSchedule, Schedule}
   alias ScreensConfig.Departures.Header.WayfindingPoint
+  alias ScreensConfig.{RecurrentSchedule, Schedule}
 
   @type t :: %__MODULE__{
           image_path: String.t(),
