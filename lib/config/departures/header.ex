@@ -28,7 +28,7 @@ defmodule ScreensConfig.Departures.Header do
   defstruct [:arrow, :read_as, :subtitle, :title, :wayfinding_information]
 
   use ScreensConfig.Struct,
-    children: [wayfindingInformation: WayfindingInformation],
+    children: [wayfinding_information: WayfindingInformation],
     with_default: true
 
   defp value_from_json("arrow", value), do: Arrow.from_json(value)
