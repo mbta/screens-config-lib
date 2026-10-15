@@ -10,12 +10,12 @@ defmodule ScreensConfig.Departures.Header.WayfindingInformation do
   """
 
   alias ScreensConfig.Departures.Header.WayfindingPoint
-  alias ScreensConfig.{RecurrentSchedule, Schedule}
+  alias ScreensConfig.Schedule
 
   @type t :: %__MODULE__{
           image_path: String.t(),
           read_as: String.t() | nil,
-          schedule: list(Schedule.t()) | RecurrentSchedule.t(),
+          schedule: list(Schedule.t()),
           wayfinding_point: WayfindingPoint.t() | nil
         }
 
