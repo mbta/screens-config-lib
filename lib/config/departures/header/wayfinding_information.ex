@@ -24,6 +24,19 @@ defmodule ScreensConfig.Departures.Header.WayfindingInformation do
 
   use ScreensConfig.Struct
 
+  defp value_from_json("schedule", datetime_periods) when is_list(datetime_periods) do
+    Enum.map(datetime_periods, &Schedule.from_json/1)
+  end
+
+  defp value_from_json("schedule", _), do: []
+
   defp value_from_json(_, value), do: value
+
+  defp value_to_json(:schedule, datetime_periods) when is_list(datetime_periods) do
+    Enum.map(datetime_periods, &Schedule.to_json/1)
+  end
+
+  defp value_to_json(:schedule, %struct{} = schedule), do: struct.to_json(schedule)
+
   defp value_to_json(_, value), do: value
 end
