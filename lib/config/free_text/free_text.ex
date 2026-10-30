@@ -48,6 +48,8 @@ defmodule ScreensConfig.FreeText do
 
   def to_plaintext(%{color: _, text: text}), do: text
 
+  def to_plaintext(%{special: :break}), do: ","
+
   def to_plaintext(%{special: _}), do: nil
 
   def to_plaintext(%{icon: _}), do: nil
